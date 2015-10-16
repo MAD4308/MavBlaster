@@ -15,6 +15,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".DepartmentSelection" >
+        </activity>
+        <activity android:name=".CourseSelection" >
+        </activity>
+        <activity android:name=".QuizGameSpin" >
+        </activity>
+        <activity android:name=".QuizGame" >
+        </activity>
     </application>
 
 </manifest>

@@ -3,4 +3,17 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="utaOrange">#f58025</color>
+    <color name="utaDarkOrange">#934D16</color>
+    <color name="utaBlue">#0064b1</color>
+    <color name="utaSecondaryBlue">#00447c</color>
+    <color name="utaSecondaryLightestBlue">#d4effc</color>
+    <color name="utaBlack">#000000</color>
+    <color name="utaSecondaryGrey">#939598</color>
+    <color name="utaWhite">#ffffff</color>
+    <color name="utaSecondaryWhite">#e7f6fd</color>
+    <color name="utaSecondaryTan">#d99b64</color>
+    <color name="utaSecondaryLightTan">#d0bf8b</color>
+    <color name="utaSecondaryLightestTan">#e6dbbe</color>
+
 </resources>

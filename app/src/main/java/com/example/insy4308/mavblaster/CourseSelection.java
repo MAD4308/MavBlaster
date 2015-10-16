@@ -3,13 +3,12 @@ package com.example.insy4308.mavblaster;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class StartMenu extends AppCompatActivity {
+public class CourseSelection extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.start_menu);
+        setContentView(R.layout.course_selection);
         getSupportActionBar().hide();
-
     }
 }
