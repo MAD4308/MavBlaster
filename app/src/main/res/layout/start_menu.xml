@@ -19,4 +19,16 @@
         android:layout_marginTop="95dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_button_rounded"
+        android:textColor="@color/utaWhite"
+        android:id="@+id/start"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:text="@string/start"
+        android:textSize="20sp" />
 </RelativeLayout>
