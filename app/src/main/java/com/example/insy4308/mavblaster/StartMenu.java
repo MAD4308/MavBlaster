@@ -17,14 +17,11 @@ public class StartMenu extends AppCompatActivity {
         setContentView(R.layout.start_menu);
         getSupportActionBar().hide();
 
-        final Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.anim_fade_out);
-
         Button start = (Button) findViewById(R.id.start);
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.startAnimation(fadeOut);
                 departmentSelection = new Intent(StartMenu.this, DepartmentSelection.class);
                 startActivity(departmentSelection);
             }
