@@ -13,7 +13,6 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
     private Button fINA;
     private Button mANA;
     private Button aCCT;
-    private Button oPMA;
     private Button mKTG;
     private Button eCON;
 
@@ -27,17 +26,17 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
         fINA = (Button) findViewById(R.id.fina);
         mANA = (Button) findViewById(R.id.mana);
         aCCT = (Button) findViewById(R.id.acct);
-        oPMA = (Button) findViewById(R.id.opma);
-        mKTG = (Button) findViewById(R.id.mktg);
         eCON = (Button) findViewById(R.id.econ);
+        mKTG = (Button) findViewById(R.id.mktg);
+
 
         iNSY.setOnClickListener(this);
         fINA.setOnClickListener(this);
         mANA.setOnClickListener(this);
         aCCT.setOnClickListener(this);
-        oPMA.setOnClickListener(this);
-        mKTG.setOnClickListener(this);
         eCON.setOnClickListener(this);
+        mKTG.setOnClickListener(this);
+
     }
     public void onClick(View v) {
         switch (v.getId()) {
@@ -58,7 +57,7 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
                 courseSelection = new Intent(DepartmentSelection.this, CourseSelection.class);
                 startActivity(courseSelection);
                 break;
-            case R.id.opma:
+            case R.id.econ:
                 courseSelection = new Intent(DepartmentSelection.this, CourseSelection.class);
                 startActivity(courseSelection);
                 break;
@@ -66,10 +65,7 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
                 courseSelection = new Intent(DepartmentSelection.this, CourseSelection.class);
                 startActivity(courseSelection);
                 break;
-            case R.id.econ:
-                courseSelection = new Intent(DepartmentSelection.this, CourseSelection.class);
-                startActivity(courseSelection);
-                break;
+
         }
     }
 }
