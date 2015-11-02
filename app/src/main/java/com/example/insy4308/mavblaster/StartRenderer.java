@@ -82,7 +82,7 @@ public class StartRenderer implements Renderer {
                 final Vector particleDirection = new Vector(0f, 1.0f, 0f);
                 final Vector particleDirectionLeft = new Vector(-0.1f, 1.0f, 0f);
                 final Vector particleDirectionRight = new Vector(0.1f, 1.0f, 0f);
-                final float angleVarianceInDegrees = 5f;
+                final float angleVarianceInDegrees = 10f;
                 final float speedVariance = 1f;
 
                 aParticleShooter = new ParticleShooter(
