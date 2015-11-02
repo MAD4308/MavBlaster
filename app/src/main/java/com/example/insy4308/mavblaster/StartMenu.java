@@ -1,31 +1,54 @@
 package com.example.insy4308.mavblaster;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
-public class StartMenu extends AppCompatActivity {
-
+public class StartMenu extends Activity {
+    private StartGLSurfaceView glSurfaceView;
+    private StartRenderer renderer;
     Intent departmentSelection = null;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.start_menu);
-        getSupportActionBar().hide();
 
-        Button start = (Button) findViewById(R.id.start);
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.start_menu);
 
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                departmentSelection = new Intent(StartMenu.this, DepartmentSelection.class);
-                startActivity(departmentSelection);
-            }
-        });
+            Button start = (Button) findViewById(R.id.start);
+            glSurfaceView = (StartGLSurfaceView) findViewById (R.id.start_surface_view);
 
-    }
+            glSurfaceView.setEGLContextClientVersion(2);
+
+            final DisplayMetrics displayMetrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+            renderer = new StartRenderer(this);
+            glSurfaceView.setRenderer(renderer, displayMetrics.density);
+
+            start.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    departmentSelection = new Intent(StartMenu.this, DepartmentSelection.class);
+                    startActivity(departmentSelection);
+                }
+            });
+        }
+
+        @Override
+        protected void onPause() {
+            super.onPause();
+                glSurfaceView.onPause();
+        }
+
+        @Override
+        protected void onResume() {
+            super.onResume();
+                glSurfaceView.onResume();
+        }
 }
+
+
