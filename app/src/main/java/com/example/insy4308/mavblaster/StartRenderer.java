@@ -109,9 +109,9 @@ public class StartRenderer implements Renderer {
                 particleTexture = TextureHelper.loadTexture(context, R.drawable.particle);
 
                 skyboxTexture = TextureHelper.loadCubeMap(context,
-                        new int[] { /*left*/R.drawable.right_galaxy, /*right*/R.drawable.left_galaxy,
-                                /*bottom*/R.drawable.down_galaxy, /*top*/R.drawable.up_galaxy,
-                                /*front*/R.drawable.front_galaxy, /*back*/R.drawable.back_galaxy});
+                        new int[] { /*negx*/R.drawable.right_galaxy, /*posx*/R.drawable.left_galaxy,
+                                /*negy*/R.drawable.down_galaxy, /*posy*/R.drawable.up_galaxy,
+                                /*negz*/R.drawable.front_galaxy, /*posz*/R.drawable.back_galaxy});
         }
 
         @Override
