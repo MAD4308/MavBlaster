@@ -109,7 +109,7 @@ public class StartRenderer implements Renderer {
                 particleTexture = TextureHelper.loadTexture(context, R.drawable.particle);
 
                 skyboxTexture = TextureHelper.loadCubeMap(context,
-                        new int[] { /*left*/R.drawable.left_galaxy, /*right*/R.drawable.right_galaxy,
+                        new int[] { /*left*/R.drawable.right_galaxy, /*right*/R.drawable.left_galaxy,
                                 /*bottom*/R.drawable.down_galaxy, /*top*/R.drawable.up_galaxy,
                                 /*front*/R.drawable.front_galaxy, /*back*/R.drawable.back_galaxy});
         }
@@ -117,9 +117,7 @@ public class StartRenderer implements Renderer {
         @Override
         public void onSurfaceChanged(GL10 glUnused, int width, int height) {
                 glViewport(0, 0, width, height);
-
-                MatrixHelper.perspectiveM(projectionMatrix, 45, (float) width
-                        / (float) height, 1f, 10f);
+                MatrixHelper.perspectiveM(projectionMatrix, 45, (float) width / (float) height, 1f, 10f);
         }
 
         @Override
@@ -127,7 +125,6 @@ public class StartRenderer implements Renderer {
                 glClear(GL_COLOR_BUFFER_BIT);
                 drawSkybox();
                 drawParticles();
-                float temp =+ 0.01f;
                 animation(1.0f,0.0f);
         }
 
@@ -150,8 +147,6 @@ public class StartRenderer implements Renderer {
                 cParticleShooter.addParticles(particleSystem, currentTime, 1);
 
                 setIdentityM(viewMatrix, 0);
-                //rotateM(viewMatrix, 0, -yRotation, 1f, 0f, 0f);
-                //rotateM(viewMatrix, 0, -xRotation, 0f, 1f, 0f);
                 translateM(viewMatrix, 0, 0f, -1.5f, -5f);
                 multiplyMM(viewProjectionMatrix, 0, projectionMatrix, 0, viewMatrix, 0);
 
