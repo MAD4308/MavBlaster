@@ -14,11 +14,10 @@ import com.example.insy4308.mavblaster.R;
 import com.example.insy4308.mavblaster.mavUtilities.Constants;
 
 public class ParticleShaderProgram extends ShaderProgram {
-    // Uniform locations
+
     private final int uMatrixLocation;
     private final int uTimeLocation;
 
-    // Attribute locations
     private final int aPositionLocation;
     private final int aColorLocation;
     private final int aDirectionVectorLocation;
@@ -28,22 +27,16 @@ public class ParticleShaderProgram extends ShaderProgram {
         super(context, R.raw.particle_vertex_shader,
                 R.raw.particle_fragment_shader);
 
-        // Retrieve uniform locations for the shader program.
         uMatrixLocation = glGetUniformLocation(program, Constants.U_MATRIX);
         uTimeLocation = glGetUniformLocation(program, Constants.U_TIME);
         uTextureUnitLocation = glGetUniformLocation(program, Constants.U_TEXTURE_UNIT);
 
-        // Retrieve attribute locations for the shader program.
         aPositionLocation = glGetAttribLocation(program, Constants.A_POSITION);
         aColorLocation = glGetAttribLocation(program, Constants.A_COLOR);
         aDirectionVectorLocation = glGetAttribLocation(program, Constants.A_DIRECTION_VECTOR);
-        aParticleStartTimeLocation =
-                glGetAttribLocation(program, Constants.A_PARTICLE_START_TIME);
+        aParticleStartTimeLocation = glGetAttribLocation(program, Constants.A_PARTICLE_START_TIME);
     }
 
-    /*
-    public void setUniforms(float[] matrix, float elapsedTime) {
-     */
     public void setUniforms(float[] matrix, float elapsedTime, int textureId) {
         glUniformMatrix4fv(uMatrixLocation, 1, false, matrix, 0);
         glUniform1f(uTimeLocation, elapsedTime);
