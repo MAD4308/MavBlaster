@@ -11,7 +11,7 @@ import android.content.res.Resources;
 public class TextResourceReader {
 
     public static String readTextFileFromResource(Context context, int resourceId) {
-        StringBuilder shader = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         try {
             InputStream inputStream = context.getResources().openRawResource(resourceId);
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -19,8 +19,8 @@ public class TextResourceReader {
             String sentence;
 
             while ((sentence = bufferedReader.readLine()) != null) {
-                shader.append(sentence);
-                shader.append('\n');
+                stringBuilder.append(sentence);
+                stringBuilder.append('\n');
             }
 
         } catch (IOException e) {
@@ -28,6 +28,6 @@ public class TextResourceReader {
         } catch (Resources.NotFoundException nfe) {
             throw new RuntimeException("Resource not found: " + resourceId, nfe);
         }
-        return shader.toString();
+        return stringBuilder.toString();
     }
 }
