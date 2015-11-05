@@ -8,6 +8,7 @@
         android:id="@+id/start_surface_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,33 +19,32 @@
         tools:context=".StartMenu">
 
         <ImageView
-            android:layout_width="330dp"
-            android:layout_height="250dp"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
             android:id="@+id/startLogo"
             android:src="@drawable/mavs"
-            android:layout_above="@+id/start"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="74dp" />
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="50dp"
             android:id="@+id/mav_blaster_logo"
             android:src="@drawable/mavblaster1"
-            android:layout_above="@+id/start"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="34dp" />
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:background="@drawable/start_button"
             android:textColor="@color/utaWhite"
             android:id="@+id/start"
-            android:layout_marginBottom="47dp"
             android:textSize="20sp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
+
     </RelativeLayout>
 </FrameLayout>

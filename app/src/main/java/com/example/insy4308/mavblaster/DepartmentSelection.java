@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class DepartmentSelection extends AppCompatActivity implements View.OnClickListener {
 
-    private Intent courseSelection = null;
+    private Intent quizSpinner = null;
     private Button iNSY;
     private Button fINA;
     private Button mANA;
@@ -20,7 +20,6 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.department_selection);
-        getSupportActionBar().hide();
 
         iNSY = (Button) findViewById(R.id.insy);
         fINA = (Button) findViewById(R.id.fina);
@@ -37,33 +36,29 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
         eCON.setOnClickListener(this);
         mKTG.setOnClickListener(this);
 
+        quizSpinner = new Intent(DepartmentSelection.this, QuizGameSpin.class);
     }
     public void onClick(View v) {
         switch (v.getId()) {
 
             case R.id.insy:
-                courseSelection = new Intent(DepartmentSelection.this, CourseSelection.class);
-                startActivity(courseSelection);
+
+                startActivity(quizSpinner);
                 break;
             case R.id.fina:
-                courseSelection = new Intent(DepartmentSelection.this, CourseSelection.class);
-                startActivity(courseSelection);
+                startActivity(quizSpinner);
                 break;
             case R.id.mana:
-                courseSelection = new Intent(DepartmentSelection.this, CourseSelection.class);
-                startActivity(courseSelection);
+                startActivity(quizSpinner);
                 break;
             case R.id.acct:
-                courseSelection = new Intent(DepartmentSelection.this, CourseSelection.class);
-                startActivity(courseSelection);
+                startActivity(quizSpinner);
                 break;
             case R.id.econ:
-                courseSelection = new Intent(DepartmentSelection.this, CourseSelection.class);
-                startActivity(courseSelection);
+                startActivity(quizSpinner);
                 break;
             case R.id.mktg:
-                courseSelection = new Intent(DepartmentSelection.this, CourseSelection.class);
-                startActivity(courseSelection);
+                startActivity(quizSpinner);
                 break;
 
         }
