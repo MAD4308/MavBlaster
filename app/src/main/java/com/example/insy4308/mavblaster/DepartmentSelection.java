@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.insy4308.mavblaster.mavUtilities.Departments;
+
 public class DepartmentSelection extends AppCompatActivity implements View.OnClickListener {
 
     private Intent quizSpinner = null;
@@ -20,6 +22,7 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.department_selection);
+        getSupportActionBar().hide();
 
         iNSY = (Button) findViewById(R.id.insy);
         fINA = (Button) findViewById(R.id.fina);
@@ -42,22 +45,27 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
         switch (v.getId()) {
 
             case R.id.insy:
-
+                Departments.INSY.attachTo(quizSpinner);
                 startActivity(quizSpinner);
                 break;
             case R.id.fina:
+                Departments.FINA.attachTo(quizSpinner);
                 startActivity(quizSpinner);
                 break;
             case R.id.mana:
+                Departments.MANA.attachTo(quizSpinner);
                 startActivity(quizSpinner);
                 break;
             case R.id.acct:
+                Departments.ACCT.attachTo(quizSpinner);
                 startActivity(quizSpinner);
                 break;
             case R.id.econ:
+                Departments.ECON.attachTo(quizSpinner);
                 startActivity(quizSpinner);
                 break;
             case R.id.mktg:
+                Departments.MKTG.attachTo(quizSpinner);
                 startActivity(quizSpinner);
                 break;
 

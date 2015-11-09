@@ -1,9 +1,8 @@
-package com.example.insy4308.mavblaster;
+package com.example.insy4308.mavblaster.openGLES2;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 
 
 public class StartGLSurfaceView extends GLSurfaceView{

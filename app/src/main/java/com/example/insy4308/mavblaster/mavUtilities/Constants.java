@@ -10,6 +10,12 @@ public final class Constants {
     public static final int COLOR_COMPONENT_COUNT = 3;
     public static final int VECTOR_COMPONENT_COUNT = 3;
     public static final int PARTICLE_START_TIME_COMPONENT_COUNT = 1;
+    public static final int INSY = 1;
+    public static final int FINA = 2;
+    public static final int MANA = 3;
+    public static final int ACCT = 4;
+    public static final int ECON = 5;
+    public static final int MKGT = 6;
 
     public static final float EYE_X = 0.0f;
     public static final float EYE_Y = 0.0f;

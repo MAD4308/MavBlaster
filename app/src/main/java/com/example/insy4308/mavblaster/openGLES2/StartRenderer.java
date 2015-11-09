@@ -1,4 +1,4 @@
-package com.example.insy4308.mavblaster;
+package com.example.insy4308.mavblaster.openGLES2;
 
 import static android.opengl.GLES20.GL_COLOR_BUFFER_BIT;
 import static android.opengl.GLES20.glClear;
@@ -12,6 +12,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.opengl.GLSurfaceView.Renderer;
 
+import com.example.insy4308.mavblaster.R;
 import com.example.insy4308.mavblaster.objects.Skybox;
 import com.example.insy4308.mavblaster.objects.ParticleShooter;
 import com.example.insy4308.mavblaster.objects.ParticleSystem;
