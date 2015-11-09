@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.insy4308.mavblaster.mavUtilities.Departments;
+import static com.example.insy4308.mavblaster.mavUtilities.Departments.*;
 
 public class DepartmentSelection extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,27 +45,27 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
         switch (v.getId()) {
 
             case R.id.insy:
-                Departments.INSY.attachTo(quizSpinner);
+                INFO_SYS.attachTo(quizSpinner);
                 startActivity(quizSpinner);
                 break;
             case R.id.fina:
-                Departments.FINA.attachTo(quizSpinner);
+                FINANCE.attachTo(quizSpinner);
                 startActivity(quizSpinner);
                 break;
             case R.id.mana:
-                Departments.MANA.attachTo(quizSpinner);
+                MANAGEMENT.attachTo(quizSpinner);
                 startActivity(quizSpinner);
                 break;
             case R.id.acct:
-                Departments.ACCT.attachTo(quizSpinner);
+                ACCOUNTING.attachTo(quizSpinner);
                 startActivity(quizSpinner);
                 break;
             case R.id.econ:
-                Departments.ECON.attachTo(quizSpinner);
+                ECONOMY.attachTo(quizSpinner);
                 startActivity(quizSpinner);
                 break;
             case R.id.mktg:
-                Departments.MKTG.attachTo(quizSpinner);
+                MARKETING.attachTo(quizSpinner);
                 startActivity(quizSpinner);
                 break;
 

@@ -7,8 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.insy4308.mavblaster.mavUtilities.Constants;
 import com.example.insy4308.mavblaster.mavUtilities.Departments;
+
+import static com.example.insy4308.mavblaster.mavUtilities.Constants.*;
+import static com.example.insy4308.mavblaster.mavUtilities.Departments.*;
 
 public class QuizGame extends AppCompatActivity {
 
@@ -19,7 +21,7 @@ public class QuizGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz_game);
         getSupportActionBar().hide();
-        final Departments departments = Departments.detachFrom(getIntent());
+        final Departments departments = detachFrom(getIntent());
         Button buttonTest = (Button) findViewById(R.id.buttonTest);
 
         //another test to make sure departments keeps passing to next intent
@@ -27,26 +29,26 @@ public class QuizGame extends AppCompatActivity {
         finalScore = new Intent(QuizGame.this, FinalScore.class);
         if(departments != null){
             switch (departments.getDepartmentCode()){
-                case Constants.INSY:
+                case INSY:
                     Log.i("INSY", "Test");
                     break;
-                case Constants.FINA:
+                case FINA:
                     buttonTest.setBackgroundResource(R.drawable.fina_icon);
                     Log.i("FINA","Test");
                     break;
-                case Constants.MANA:
+                case MANA:
                     buttonTest.setBackgroundResource(R.drawable.mana_icon);
                     Log.i("MANA","Test");
                     break;
-                case Constants.ACCT:
+                case ACCT:
                     buttonTest.setBackgroundResource(R.drawable.acct_icon);
                     Log.i("ACCT","Test");
                     break;
-                case Constants.ECON:
+                case ECON:
                     buttonTest.setBackgroundResource(R.drawable.econ_icon);
                     Log.i("ECON","Test");
                     break;
-                case Constants.MKGT:
+                case MKGT:
                     buttonTest.setBackgroundResource(R.drawable.mark_icon);
                     Log.i("MKGT","Test");
                     break;
