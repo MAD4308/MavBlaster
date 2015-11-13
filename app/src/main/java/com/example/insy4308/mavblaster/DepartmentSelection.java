@@ -43,28 +43,35 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
 
             // Will want to send an ID with each department selection that identifies which department
             // was selected, which will determine the JSON response and Quiz Gameplay.
+
             case R.id.insy:
                 quizGame = new Intent(DepartmentSelection.this, QuizGame.class);
+                quizGame.putExtra("department", 1);
                 startActivity(quizGame);
                 break;
             case R.id.fina:
                 quizGame = new Intent(DepartmentSelection.this, QuizGame.class);
+                quizGame.putExtra("department", 2);
                 startActivity(quizGame);
                 break;
             case R.id.mana:
                 quizGame = new Intent(DepartmentSelection.this, QuizGame.class);
+                quizGame.putExtra("department", 3);
                 startActivity(quizGame);
                 break;
             case R.id.acct:
                 quizGame = new Intent(DepartmentSelection.this, QuizGame.class);
+                quizGame.putExtra("department", 4);
                 startActivity(quizGame);
                 break;
             case R.id.econ:
                 quizGame = new Intent(DepartmentSelection.this, QuizGame.class);
+                quizGame.putExtra("department", 5);
                 startActivity(quizGame);
                 break;
             case R.id.mktg:
                 quizGame = new Intent(DepartmentSelection.this, QuizGame.class);
+                quizGame.putExtra("department", 6);
                 startActivity(quizGame);
                 break;
 

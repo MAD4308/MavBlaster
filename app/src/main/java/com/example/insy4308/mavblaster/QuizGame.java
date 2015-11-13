@@ -3,6 +3,8 @@ package com.example.insy4308.mavblaster;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -27,9 +29,16 @@ public class QuizGame extends AppCompatActivity {
 
         // Get intent bundle extras here
         // Should make deparments identified by # 1- 6 or something to send to UrlId....
+        // Start Activity and expect results? OR just send an activity?
+        Bundle extras = getIntent().getExtras();  // capture the data that came with the intent
+        int department = 0;
+        // Data may be blank:
+        if (extras != null) {
+            department = extras.getInt("department");
+        }
 
         // Method to retrieve department URL & UrlId set
-        url = getDepartmentUrl();
+        url = getDepartmentUrl(department);
         //Method for JsonArrayRequest
         JsonArrayRequest(url);
     }
@@ -87,16 +96,42 @@ public class QuizGame extends AppCompatActivity {
         });
         Volley.newRequestQueue(this).add(request);
     }
-    public String getDepartmentUrl()
+    public String getDepartmentUrl(int department)
     {
         // Logic to determine department & set UrlId that will correspond with that url
         // url = some url
-        UrlId = "18157623";
+        // UrlId - Pulls the flash card set from the list of clash card sets in the URL's
 
+        String url = "";
+        switch(department){
+            case 1:
+                url = "https://api.quizlet.com/2.0/users/xCAFEBABE/sets?client_id=J2gjAn276Y&whitespace=1";
+                UrlId = "18157623";
+                break;
+            case 2:
+                url = "https://api.quizlet.com/2.0/users/xCAFEBABE/sets?client_id=J2gjAn276Y&whitespace=1";
+                UrlId = "18157623";
+                break;
+            case 3:
+                url = "https://api.quizlet.com/2.0/users/xCAFEBABE/sets?client_id=J2gjAn276Y&whitespace=1";
+                UrlId = "18157623";
+                break;
+            case 4:
+                url = "https://api.quizlet.com/2.0/users/xCAFEBABE/sets?client_id=J2gjAn276Y&whitespace=1";
+                UrlId = "18157623";
+                break;
+            case 5:
+                url = "https://api.quizlet.com/2.0/users/xCAFEBABE/sets?client_id=J2gjAn276Y&whitespace=1";
+                UrlId = "18157623";
+                break;
+            case 6:
+                url = "https://api.quizlet.com/2.0/users/xCAFEBABE/sets?client_id=J2gjAn276Y&whitespace=1";
+                UrlId = "18157623";
+                break;
+        }
         // setUrlId("#######");
 
-        // For now...
-        return "https://api.quizlet.com/2.0/users/xCAFEBABE/sets?client_id=J2gjAn276Y&whitespace=1";
+        return url;
     }
 
     public String[] compileRandomAnswers(JSONArray terms)
