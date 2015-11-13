@@ -18,14 +18,18 @@ public enum Departments {
     private Departments(int i){
         departmentCode = i;
     }
-    public void attachTo(Intent intent){
+    public void attachDeptTo(Intent intent){
         intent.putExtra(name, ordinal());
     }
-    public static Departments detachFrom(Intent intent){
+    public static Departments detachDeptFrom(Intent intent){
         if(!intent.hasExtra(name)) throw new IllegalStateException();
         return values()[intent.getIntExtra(name, -1)];
     }
-    public int getDepartmentCode(){
+    public int getDepartmentCode() {
         return departmentCode;
+    }
+
+    public String getDepartmentUrl(int i) {
+        return DEPARTMENT_URLS[departmentCode-1][i - 1];
     }
 }

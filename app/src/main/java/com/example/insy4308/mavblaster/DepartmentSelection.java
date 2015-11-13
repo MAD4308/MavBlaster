@@ -22,7 +22,6 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.department_selection);
-        getSupportActionBar().hide();
 
         iNSY = (Button) findViewById(R.id.insy);
         fINA = (Button) findViewById(R.id.fina);
@@ -45,27 +44,27 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
         switch (v.getId()) {
 
             case R.id.insy:
-                INFO_SYS.attachTo(quizSpinner);
+                INFO_SYS.attachDeptTo(quizSpinner);
                 startActivity(quizSpinner);
                 break;
             case R.id.fina:
-                FINANCE.attachTo(quizSpinner);
+                FINANCE.attachDeptTo(quizSpinner);
                 startActivity(quizSpinner);
                 break;
             case R.id.mana:
-                MANAGEMENT.attachTo(quizSpinner);
+                MANAGEMENT.attachDeptTo(quizSpinner);
                 startActivity(quizSpinner);
                 break;
             case R.id.acct:
-                ACCOUNTING.attachTo(quizSpinner);
+                ACCOUNTING.attachDeptTo(quizSpinner);
                 startActivity(quizSpinner);
                 break;
             case R.id.econ:
-                ECONOMY.attachTo(quizSpinner);
+                ECONOMY.attachDeptTo(quizSpinner);
                 startActivity(quizSpinner);
                 break;
             case R.id.mktg:
-                MARKETING.attachTo(quizSpinner);
+                MARKETING.attachDeptTo(quizSpinner);
                 startActivity(quizSpinner);
                 break;
 

@@ -44,6 +44,10 @@ public final class Constants {
     public static final String A_COLOR = "a_Color";
     public static final String A_TEXTURE_COORDINATES = "a_TextureCoordinates";
 
+    public static final String[][] DEPARTMENT_URLS = {
+            new String[]{"https://api.quizlet.com/2.0/classes/2158325/sets?client_id=9BtdKcwDcH&whitespace=1"},
+            new String[]{"https://api.quizlet.com/2.0/classes/2158506/sets?client_id=9BtdKcwDcH&whitespace=1"}};
+
     public static final int TOTAL_COMPONENT_COUNT = POSITION_COMPONENT_COUNT + COLOR_COMPONENT_COUNT + VECTOR_COMPONENT_COUNT + PARTICLE_START_TIME_COMPONENT_COUNT;
     public static final int STRIDE = TOTAL_COMPONENT_COUNT * BYTES_PER_FLOAT;
 

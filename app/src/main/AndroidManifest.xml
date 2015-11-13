@@ -6,6 +6,8 @@
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
+    <!--Allow for internet access to retrieve JSON data from Quizlet API-->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
