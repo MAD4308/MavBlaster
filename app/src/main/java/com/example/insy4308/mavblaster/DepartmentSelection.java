@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class DepartmentSelection extends AppCompatActivity implements View.OnClickListener {
 
-    private Intent courseSelection = null;
+    private Intent quizGame = null;
     private Button iNSY;
     private Button fINA;
     private Button mANA;
@@ -41,29 +41,31 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
 
+            // Will want to send an ID with each department selection that identifies which department
+            // was selected, which will determine the JSON response and Quiz Gameplay.
             case R.id.insy:
-                courseSelection = new Intent(DepartmentSelection.this, CourseSelection.class);
-                startActivity(courseSelection);
+                quizGame = new Intent(DepartmentSelection.this, QuizGame.class);
+                startActivity(quizGame);
                 break;
             case R.id.fina:
-                courseSelection = new Intent(DepartmentSelection.this, CourseSelection.class);
-                startActivity(courseSelection);
+                quizGame = new Intent(DepartmentSelection.this, QuizGame.class);
+                startActivity(quizGame);
                 break;
             case R.id.mana:
-                courseSelection = new Intent(DepartmentSelection.this, CourseSelection.class);
-                startActivity(courseSelection);
+                quizGame = new Intent(DepartmentSelection.this, QuizGame.class);
+                startActivity(quizGame);
                 break;
             case R.id.acct:
-                courseSelection = new Intent(DepartmentSelection.this, CourseSelection.class);
-                startActivity(courseSelection);
+                quizGame = new Intent(DepartmentSelection.this, QuizGame.class);
+                startActivity(quizGame);
                 break;
             case R.id.econ:
-                courseSelection = new Intent(DepartmentSelection.this, CourseSelection.class);
-                startActivity(courseSelection);
+                quizGame = new Intent(DepartmentSelection.this, QuizGame.class);
+                startActivity(quizGame);
                 break;
             case R.id.mktg:
-                courseSelection = new Intent(DepartmentSelection.this, CourseSelection.class);
-                startActivity(courseSelection);
+                quizGame = new Intent(DepartmentSelection.this, QuizGame.class);
+                startActivity(quizGame);
                 break;
 
         }
