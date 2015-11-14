@@ -30,6 +30,6 @@ public enum Departments {
     }
 
     public String getDepartmentUrl(int i) {
-        return DEPARTMENT_URLS[departmentCode-1][i - 1];
+        return SET_URLS[departmentCode-1][i - 1];
     }
 }

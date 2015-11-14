@@ -13,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.insy4308.mavblaster.mavUtilities.Categories;
 import com.example.insy4308.mavblaster.mavUtilities.Departments;
@@ -40,7 +41,7 @@ public class QuizGame extends AppCompatActivity {
         final Categories categories = detachCatFrom(getIntent());
         Button buttonTest = (Button) findViewById(R.id.buttonTest);
 
-        JsonArrayRequest(departments.getDepartmentUrl(categories.getCategoryCode()));
+        JsonObjectRequest(QUIZ_URL_START+departments.getDepartmentUrl(categories.getCategoryCode())+QUIZ_URL_END);
         finalScore = new Intent(QuizGame.this, FinalScore.class);
 
         //another test button to go to next activity
@@ -53,45 +54,34 @@ public class QuizGame extends AppCompatActivity {
             }
         });
     }
-    public void JsonArrayRequest(String url)
+    public void JsonObjectRequest(String url)
     {
-        JsonArrayRequest request = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+        JsonObjectRequest request = new JsonObjectRequest(url, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse (JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject jobj = response.getJSONObject(i);
-                        String id = jobj.getString("id");
+            public void onResponse (JSONObject response) {
+                try {
+                    JSONArray terms = response.getJSONArray("terms");
+                    String [] randomAnswers = compileRandomAnswers(terms);
+                    String question = "";
+                    String answer = "";
+                    Random rand = new Random();
+                    //int randomIndex = rand.nextInt(terms.length());
+                    //Log.v("Array length of terms=", "" + terms.length());
+                    for (int j = 0; (j < terms.length()) && !(j > 10); j++){
+                        JSONObject term = terms.getJSONObject(j);
+                        question = term.getString("term");
+                        answer = term.getString("definition");
 
-                        // Compile Questions & Array of random answers to populate as dummy answers
-                        JSONArray terms = jobj.getJSONArray("terms");
-                        String [] randomAnswers = compileRandomAnswers(terms);
-                        String question = "";
-                        String answer = "";
-                        Random rand = new Random();
-                        //int randomIndex = rand.nextInt(terms.length());
-                        //Log.v("Array length of terms=", "" + terms.length());
-                        for (int j = 0; j < terms.length(); j++){
-                            if(j > 2)
-                            {
-                                break; // Only pulling three questions from url
-                            }
-                            JSONObject term1 = terms.getJSONObject(j);
-                            question = term1.getString("term");
-                            answer = term1.getString("definition");
-
-                            Log.v("Q: ", question + "?\nA) " + answer + "\nB) " + randomAnswers[rand.nextInt(terms.length())] + "\nC) " +
-                                    randomAnswers[rand.nextInt(terms.length())] + "\nD) " + randomAnswers[rand.nextInt(terms.length())]);
-                        }
-
-                        Log.v("Data ID: ", id);
-                        Log.v("Index i: " , "" + i);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                        Log.v("Q: ", question + "?\nA) " + answer + "\nB) " + randomAnswers[rand.nextInt(terms.length())] + "\nC) " +
+                                randomAnswers[rand.nextInt(terms.length())] + "\nD) " + randomAnswers[rand.nextInt(terms.length())]);
                     }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                // Log.v ("data from web", response.toString()
             }
+            // Log.v ("data from web", response.toString()
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
