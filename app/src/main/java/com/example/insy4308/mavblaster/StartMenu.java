@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.insy4308.mavblaster.openGLES2.StartGLSurfaceView;
+import com.example.insy4308.mavblaster.openGLES2.StartRenderer;
 
 public class StartMenu extends Activity {
     private StartGLSurfaceView glSurfaceView;

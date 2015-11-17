@@ -49,9 +49,7 @@ public class ShaderHelper {
         final int programObjectId = glCreateProgram();
 
         glAttachShader(programObjectId, vertexShaderId);
-
         glAttachShader(programObjectId, fragmentShaderId);
-
         glLinkProgram(programObjectId);
 
         final int[] linkStatus = new int[1];

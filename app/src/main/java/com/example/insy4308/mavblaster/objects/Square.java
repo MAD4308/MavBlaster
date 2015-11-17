@@ -2,7 +2,7 @@ package com.example.insy4308.mavblaster.objects;
 
 import java.nio.FloatBuffer;
 
-public class SquareTexture {
+public class Square {
     private int program;
     private FloatBuffer squareVertices = null;
     private float centerX = 0.0f;
@@ -11,7 +11,7 @@ public class SquareTexture {
     private float height = 0.0f;
     private float rotation = 0.0f;
 
-    public SquareTexture() {
+    public Square() {
         program = -1;
         centerX = 0.0f;
         centerY = 0.0f;
@@ -20,7 +20,7 @@ public class SquareTexture {
         rotation = 0.0f;
     }
 
-    public SquareTexture(int program, FloatBuffer squareVertices, float centerX, float centerY, float width, float height, float rotation) {
+    public Square(int program, FloatBuffer squareVertices, float centerX, float centerY, float width, float height, float rotation) {
         this.program = program;
         this.squareVertices = squareVertices;
         this.centerX = centerX;

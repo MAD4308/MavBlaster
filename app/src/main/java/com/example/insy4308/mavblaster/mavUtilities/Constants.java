@@ -11,18 +11,28 @@ public final class Constants {
     public static final int VECTOR_COMPONENT_COUNT = 3;
     public static final int PARTICLE_START_TIME_COMPONENT_COUNT = 1;
 
-    public static final float[] Light_Pos_In_Model_Space = new float[] {0.0f, 0.0f, 0.0f, 1.0f};
-    public static final float[] Light_Pos_In_World_Space = new float[4];
+    public static final int INSY = 1;
+    public static final int FINA = 2;
+    public static final int MANA = 3;
+    public static final int ACCT = 4;
+    public static final int ECON = 5;
+    public static final int MKGT = 6;
 
-    public static final float eyeX = 0.0f;
-    public static final float eyeY = 0.0f;
-    public static final float eyeZ = -0.5f;
-    public static final float lookX = 0.0f;
-    public static final float lookY = 0.0f;
-    public static final float lookZ = -5.0f;
-    public static final float upX = 0.0f;
-    public static final float upY = 1.0f;
-    public static final float upZ = 0.0f;
+    public static final int CAT1 = 1;
+    public static final int CAT2 = 2;
+    public static final int CAT3 = 3;
+    public static final int CAT4 = 4;
+    public static final int CAT5 = 5;
+
+    public static final float EYE_X = 0.0f;
+    public static final float EYE_Y = 0.0f;
+    public static final float EYE_Z = -0.5f;
+    public static final float LOOK_X = 0.0f;
+    public static final float LOOK_Y = 0.0f;
+    public static final float LOOK_Z = -5.0f;
+    public static final float UP_X = 0.0f;
+    public static final float UP_Y = 1.0f;
+    public static final float UP_Z = 0.0f;
 
     public static final String U_MATRIX = "u_Matrix";
     public static final String U_COLOR = "u_Color";
@@ -33,6 +43,19 @@ public final class Constants {
     public static final String A_POSITION = "a_Position";
     public static final String A_COLOR = "a_Color";
     public static final String A_TEXTURE_COORDINATES = "a_TextureCoordinates";
+    public static final String QUIZ_URL_START = "https://api.quizlet.com/2.0/sets/";
+    public static final String QUIZ_URL_END = "/?client_id=9BtdKcwDcH&whitespace=1";
+
+    public static final String[][] SET_URLS = {
+        /*INSY*/new String[]{"6990638","45920741","52168328","80333650","3095340"},
+        /*FINA*/new String[]{"59028934","67283930","52168328","80333650","3095340"},
+        /*MANA*/new String[]{"27410096","45920741","52168328","80333650","3095340"},
+        /*ACCT*/new String[]{"41305296","45920741","52168328","80333650","3095340"},
+        /*ECON*/new String[]{"75478040","45920741","52168328","80333650","3095340"},
+        /*MARK*/new String[]{"76457122","45920741","52168328","80333650","3095340"}};
+
+    public static final int TOTAL_COMPONENT_COUNT = POSITION_COMPONENT_COUNT + COLOR_COMPONENT_COUNT + VECTOR_COMPONENT_COUNT + PARTICLE_START_TIME_COMPONENT_COUNT;
+    public static final int STRIDE = TOTAL_COMPONENT_COUNT * BYTES_PER_FLOAT;
 
     private Constants() {
         throw new AssertionError();

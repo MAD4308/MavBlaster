@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import static com.example.insy4308.mavblaster.mavUtilities.Departments.*;
+
 public class DepartmentSelection extends AppCompatActivity implements View.OnClickListener {
 
     private Intent quizGame = null;
+    private Intent quizSpinner = null;
     private Button iNSY;
     private Button fINA;
     private Button mANA;
@@ -20,7 +23,6 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.department_selection);
-        getSupportActionBar().hide();
 
         iNSY = (Button) findViewById(R.id.insy);
         fINA = (Button) findViewById(R.id.fina);
@@ -37,44 +39,34 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
         eCON.setOnClickListener(this);
         mKTG.setOnClickListener(this);
 
+        quizSpinner = new Intent(DepartmentSelection.this, QuizGameSpin.class);
     }
     public void onClick(View v) {
         switch (v.getId()) {
-
-            // Will want to send an ID with each department selection that identifies which department
-            // was selected, which will determine the JSON response and Quiz Gameplay.
-
             case R.id.insy:
-                quizGame = new Intent(DepartmentSelection.this, QuizGame.class);
-                quizGame.putExtra("department", 1);
-                startActivity(quizGame);
+                INFO_SYS.attachDeptTo(quizSpinner);
+                startActivity(quizSpinner);
                 break;
             case R.id.fina:
-                quizGame = new Intent(DepartmentSelection.this, QuizGame.class);
-                quizGame.putExtra("department", 2);
-                startActivity(quizGame);
+                FINANCE.attachDeptTo(quizSpinner);
+                startActivity(quizSpinner);
                 break;
             case R.id.mana:
-                quizGame = new Intent(DepartmentSelection.this, QuizGame.class);
-                quizGame.putExtra("department", 3);
-                startActivity(quizGame);
+                MANAGEMENT.attachDeptTo(quizSpinner);
+                startActivity(quizSpinner);
                 break;
             case R.id.acct:
-                quizGame = new Intent(DepartmentSelection.this, QuizGame.class);
-                quizGame.putExtra("department", 4);
-                startActivity(quizGame);
+                ACCOUNTING.attachDeptTo(quizSpinner);
+                startActivity(quizSpinner);
                 break;
             case R.id.econ:
-                quizGame = new Intent(DepartmentSelection.this, QuizGame.class);
-                quizGame.putExtra("department", 5);
-                startActivity(quizGame);
+                ECONOMY.attachDeptTo(quizSpinner);
+                startActivity(quizSpinner);
                 break;
             case R.id.mktg:
-                quizGame = new Intent(DepartmentSelection.this, QuizGame.class);
-                quizGame.putExtra("department", 6);
-                startActivity(quizGame);
+                MARKETING.attachDeptTo(quizSpinner);
+                startActivity(quizSpinner);
                 break;
-
         }
     }
 }

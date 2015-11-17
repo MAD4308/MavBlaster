@@ -18,6 +18,6 @@ void main()
     vec3 currentPosition = a_Position + (a_DirectionVector * v_ElapsedTime);
     currentPosition.y -= gravityFactor;
     gl_Position = u_Matrix * vec4(currentPosition, 1.0);
-
-    gl_PointSize = 5.0;//size of particle
+    //size of particle
+    gl_PointSize = 25.0;
 }

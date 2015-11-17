@@ -7,6 +7,136 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/fondotest"
     tools:context="com.example.insy4308.mavblaster.QuizGame">
 
+    <!--
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/buttonTest"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+    -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/CategoryTitle"
+        android:textSize="15sp"
+        android:background="@drawable/bg_button_rounded"
+        android:id="@+id/categoryTitle"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:text="@string/Question"
+        android:textSize="13sp"
+        android:background="@drawable/bg_button_rounded2"
+        android:id="@+id/question"
+        android:layout_below="@+id/categoryTitle"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:text="Button A"
+        android:background="@drawable/bg_button_rounded2"
+        android:id="@+id/A"
+        android:onClick="userSubmission"
+        android:textSize="8sp"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/B"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:text="Button B"
+        android:background="@drawable/bg_button_rounded2"
+        android:id="@+id/B"
+        android:textSize="8sp"
+        android:layout_marginBottom="20dp"
+        android:onClick="userSubmission"
+        android:layout_above="@+id/C"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:text="Button C"
+        android:background="@drawable/bg_button_rounded2"
+        android:id="@+id/C"
+        android:textSize="8sp"
+        android:layout_marginBottom="20dp"
+        android:onClick="userSubmission"
+        android:layout_above="@+id/D"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:text="Button D"
+        android:background="@drawable/bg_button_rounded2"
+        android:id="@+id/D"
+        android:textSize="8sp"
+        android:layout_marginBottom="20dp"
+        android:onClick="userSubmission"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:text="@string/ReturnToGame"
+        android:background="@drawable/bg_button_rounded_mav"
+        android:id="@+id/returnId"
+        android:onClick="continueGame"
+        android:textSize="15sp"
+        android:layout_marginTop="350dp"
+        android:layout_centerHorizontal="true" />
+    <!--
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/AnswerA"
+        android:id="@+id/aText"
+        android:layout_below="@+id/A"
+        android:layout_toRightOf="@+id/question"
+        android:layout_toEndOf="@+id/question"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/AnswerB"
+        android:id="@+id/bText"
+        android:layout_alignTop="@+id/B"
+        android:layout_alignLeft="@+id/aText"
+        android:layout_alignStart="@+id/aText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/AnswerC"
+        android:id="@+id/cText"
+        android:layout_alignTop="@+id/C"
+        android:layout_alignRight="@+id/bText"
+        android:layout_alignEnd="@+id/bText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/AnswerD"
+        android:id="@+id/dText"
+        android:layout_alignTop="@+id/D"
+        android:layout_alignRight="@+id/bText"
+        android:layout_alignEnd="@+id/bText" />
+
+    -->
 </RelativeLayout>

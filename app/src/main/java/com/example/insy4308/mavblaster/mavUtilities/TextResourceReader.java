@@ -10,29 +10,24 @@ import android.content.res.Resources;
 
 public class TextResourceReader {
 
-    public static String readTextFileFromResource(Context context,
-                                                  int resourceId) {
-        StringBuilder body = new StringBuilder();
-
+    public static String readTextFileFromResource(Context context, int resourceId) {
+        StringBuilder stringBuilder = new StringBuilder();
         try {
-            InputStream inputStream =
-                    context.getResources().openRawResource(resourceId);
-            InputStreamReader inputStreamReader =
-                    new InputStreamReader(inputStream);
+            InputStream inputStream = context.getResources().openRawResource(resourceId);
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String sentence;
 
-            String nextLine;
-
-            while ((nextLine = bufferedReader.readLine()) != null) {
-                body.append(nextLine);
-                body.append('\n');
+            while ((sentence = bufferedReader.readLine()) != null) {
+                stringBuilder.append(sentence);
+                stringBuilder.append('\n');
             }
+
         } catch (IOException e) {
             throw new RuntimeException("Could not open resource: " + resourceId, e);
         } catch (Resources.NotFoundException nfe) {
             throw new RuntimeException("Resource not found: " + resourceId, nfe);
         }
-
-        return body.toString();
+        return stringBuilder.toString();
     }
 }
