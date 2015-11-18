@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.example.insy4308.mavblaster.openGLES2.StartGLSurfaceView;
 import com.example.insy4308.mavblaster.openGLES2.StartRenderer;
+import com.facebook.appevents.AppEventsLogger;
 
 public class StartMenu extends Activity {
     private StartGLSurfaceView glSurfaceView;
@@ -44,12 +45,14 @@ public class StartMenu extends Activity {
         protected void onPause() {
             super.onPause();
                 glSurfaceView.onPause();
+            AppEventsLogger.deactivateApp(this);
         }
 
         @Override
         protected void onResume() {
             super.onResume();
                 glSurfaceView.onResume();
+            AppEventsLogger.activateApp(this);
         }
 }
 

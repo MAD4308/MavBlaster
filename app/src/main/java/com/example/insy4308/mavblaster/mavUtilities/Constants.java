@@ -43,8 +43,25 @@ public final class Constants {
     public static final String A_POSITION = "a_Position";
     public static final String A_COLOR = "a_Color";
     public static final String A_TEXTURE_COORDINATES = "a_TextureCoordinates";
+    public static final String FB_IMAGE_URL = "http://students.uta.edu/ma/mar9680/blaster.png";
     public static final String QUIZ_URL_START = "https://api.quizlet.com/2.0/sets/";
     public static final String QUIZ_URL_END = "/?client_id=9BtdKcwDcH&whitespace=1";
+
+    public static final String[] DEPT_NAME = {
+            "Information Systems",
+            "Finance",
+            "Management",
+            "Accounting",
+            "Economics",
+            "Marketing"};
+
+    public static final String[][] CAT_NAME = {
+            /*INSY*/new String[]{"INSY Category 1","INSY Category 2","INSY Category 3","INSY Category 4","INSY Category 5"},
+            /*FINA*/new String[]{"FINA Category 1","FINA Category 2","FINA Category 3","FINA Category 4","FINA Category 5"},
+            /*MANA*/new String[]{"MANA Category 1","MANA Category 2","MANA Category 3","MANA Category 4","MANA Category 5"},
+            /*ACCT*/new String[]{"ACCT Category 1","ACCT Category 2","ACCT Category 3","ACCT Category 4","ACCT Category 5"},
+            /*ECON*/new String[]{"ECON Category 1","ECON Category 2","ECON Category 3","ECON Category 4","ECON Category 5"},
+            /*MARK*/new String[]{"MARK Category 1","MARK Category 2","MARK Category 3","MARK Category 4","MARK Category 5"}};
 
     public static final String[][] SET_URLS = {
         /*INSY*/new String[]{"6990638","45920741","52168328","80333650","3095340"},

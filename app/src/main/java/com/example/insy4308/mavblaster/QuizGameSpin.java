@@ -17,8 +17,9 @@ import static com.example.insy4308.mavblaster.mavUtilities.Departments.*;
 public class QuizGameSpin extends AppCompatActivity implements View.OnClickListener{
 
     private Intent quizGame = null;
-    Button button1;
     Departments departments;
+    static final int REQUEST_CODE = 1;
+    int score = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +27,7 @@ public class QuizGameSpin extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().hide();
         departments= detachDeptFrom(getIntent());
 
-        button1 = (Button) findViewById(R.id.button);
+        Button button1 = (Button) findViewById(R.id.button);
         Button button2 = (Button) findViewById(R.id.button2);
         Button button3 = (Button) findViewById(R.id.button3);
         Button button4 = (Button) findViewById(R.id.button4);
@@ -48,29 +49,43 @@ public class QuizGameSpin extends AppCompatActivity implements View.OnClickListe
             case R.id.button:
                 CATEGORY1.attachCatTo(quizGame);
                 departments.attachDeptTo(quizGame);
-                startActivity(quizGame);
+                startActivityForResult(quizGame, REQUEST_CODE);
                 break;
             case R.id.button2:
                 CATEGORY2.attachCatTo(quizGame);
                 departments.attachDeptTo(quizGame);
-                startActivity(quizGame);
+                startActivityForResult(quizGame, REQUEST_CODE);
                 break;
             case R.id.button3:
                 CATEGORY3.attachCatTo(quizGame);
                 departments.attachDeptTo(quizGame);
-                startActivity(quizGame);
+                startActivityForResult(quizGame, REQUEST_CODE);
                 break;
             case R.id.button4:
                 CATEGORY4.attachCatTo(quizGame);
                 departments.attachDeptTo(quizGame);
-                startActivity(quizGame);
+                startActivityForResult(quizGame, REQUEST_CODE);
                 break;
             case R.id.button5:
                 CATEGORY5.attachCatTo(quizGame);
                 departments.attachDeptTo(quizGame);
-                startActivity(quizGame);
+                startActivityForResult(quizGame, REQUEST_CODE);
                 break;
 
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE){
+            if (resultCode==RESULT_OK){
+
+                int result = data.getIntExtra("score",0);
+                score += result;
+
+                Log.i("Score= ", String.valueOf(score));
+            }
         }
     }
 }

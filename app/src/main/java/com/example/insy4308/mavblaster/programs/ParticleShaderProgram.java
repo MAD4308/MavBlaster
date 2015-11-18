@@ -11,7 +11,7 @@ import static android.opengl.GLES20.glUniform1i;
 import static android.opengl.GLES20.glUniformMatrix4fv;
 import android.content.Context;
 import com.example.insy4308.mavblaster.R;
-import com.example.insy4308.mavblaster.mavUtilities.Constants;
+import static com.example.insy4308.mavblaster.mavUtilities.Constants.*;
 
 public class ParticleShaderProgram extends ShaderProgram {
 
@@ -27,14 +27,14 @@ public class ParticleShaderProgram extends ShaderProgram {
         super(context, R.raw.particle_vertex_shader,
                 R.raw.particle_fragment_shader);
 
-        uMatrixLocation = glGetUniformLocation(program, Constants.U_MATRIX);
-        uTimeLocation = glGetUniformLocation(program, Constants.U_TIME);
-        uTextureUnitLocation = glGetUniformLocation(program, Constants.U_TEXTURE_UNIT);
+        uMatrixLocation = glGetUniformLocation(program, U_MATRIX);
+        uTimeLocation = glGetUniformLocation(program, U_TIME);
+        uTextureUnitLocation = glGetUniformLocation(program, U_TEXTURE_UNIT);
 
-        aPositionLocation = glGetAttribLocation(program, Constants.A_POSITION);
-        aColorLocation = glGetAttribLocation(program, Constants.A_COLOR);
-        aDirectionVectorLocation = glGetAttribLocation(program, Constants.A_DIRECTION_VECTOR);
-        aParticleStartTimeLocation = glGetAttribLocation(program, Constants.A_PARTICLE_START_TIME);
+        aPositionLocation = glGetAttribLocation(program, A_POSITION);
+        aColorLocation = glGetAttribLocation(program, A_COLOR);
+        aDirectionVectorLocation = glGetAttribLocation(program, A_DIRECTION_VECTOR);
+        aParticleStartTimeLocation = glGetAttribLocation(program, A_PARTICLE_START_TIME);
     }
 
     public void setUniforms(float[] matrix, float elapsedTime, int textureId) {

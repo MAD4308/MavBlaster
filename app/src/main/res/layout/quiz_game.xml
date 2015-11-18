@@ -7,13 +7,80 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
     tools:context="com.example.insy4308.mavblaster.QuizGame">
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/buttonTest"
-        android:layout_centerVertical="true"
+        android:textSize="35sp"
+        android:background="@drawable/bg_button_rounded"
+        android:id="@+id/categoryTitle"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:background="@drawable/bg_button_rounded2"
+        android:id="@+id/question"
+        android:layout_below="@+id/categoryTitle"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_button_rounded2"
+        android:id="@+id/A"
+        android:onClick="userSubmission"
+        android:textSize="15sp"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/B"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_button_rounded2"
+        android:id="@+id/B"
+        android:textSize="15sp"
+        android:layout_marginBottom="20dp"
+        android:onClick="userSubmission"
+        android:layout_above="@+id/C"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_button_rounded2"
+        android:id="@+id/C"
+        android:textSize="15sp"
+        android:layout_marginBottom="20dp"
+        android:onClick="userSubmission"
+        android:layout_above="@+id/D"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_button_rounded2"
+        android:id="@+id/D"
+        android:textSize="15sp"
+        android:layout_marginBottom="20dp"
+        android:onClick="userSubmission"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_button_rounded_mav"
+        android:id="@+id/returnId"
+        android:onClick="continueGame"
+        android:textSize="35sp"
+        android:layout_marginTop="350dp"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
