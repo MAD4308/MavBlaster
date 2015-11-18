@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,9 +18,12 @@ import static com.example.insy4308.mavblaster.mavUtilities.Departments.*;
 public class QuizGameSpin extends AppCompatActivity implements View.OnClickListener{
 
     private Intent quizGame = null;
-    Departments departments;
-    static final int REQUEST_CODE = 1;
-    int score = 0;
+    private Intent finalScore = null;
+    private Intent startMenu = null;
+    private Departments departments;
+    private static final int REQUEST_CODE = 1;
+    private int score = 0;
+    private int tries = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +44,17 @@ public class QuizGameSpin extends AppCompatActivity implements View.OnClickListe
         button5.setOnClickListener(this);
 
         quizGame = new Intent(QuizGameSpin.this, QuizGame.class);
+        finalScore = new Intent(QuizGameSpin.this, FinalScore.class);
+        startMenu = new Intent(QuizGameSpin.this, StartMenu.class);
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            startActivity(startMenu);
+            return true;
+        }
 
-
+        return super.onKeyDown(keyCode, event);
     }
     public void onClick(View v) {
         switch (v.getId()) {
@@ -78,6 +91,7 @@ public class QuizGameSpin extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
+        tries++;
         if (requestCode == REQUEST_CODE){
             if (resultCode==RESULT_OK){
 
@@ -85,6 +99,11 @@ public class QuizGameSpin extends AppCompatActivity implements View.OnClickListe
                 score += result;
 
                 Log.i("Score= ", String.valueOf(score));
+                if(tries>=10){
+                    departments.attachDeptTo(finalScore);
+                    finalScore.putExtra("score",score);
+                    startActivity(finalScore);
+                }
             }
         }
     }

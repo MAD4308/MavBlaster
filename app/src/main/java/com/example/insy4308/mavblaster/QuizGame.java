@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -32,7 +33,7 @@ import static com.example.insy4308.mavblaster.mavUtilities.Categories.*;
 
 public class QuizGame extends AppCompatActivity {
 
-    private Intent finalScore = null;
+    private Intent startMenu = null;
     private Map<String, String> answers = new HashMap<>();
     boolean IsAnswerCorrect = false;
     private String correctAnswer;
@@ -74,11 +75,12 @@ public class QuizGame extends AppCompatActivity {
             buttonB.setText(savedInstanceState.getString("button_b"));
             buttonC.setText(savedInstanceState.getString("button_c"));
             buttonD.setText(savedInstanceState.getString("button_d"));
-            //need to add more
+            //work in progress
 
         }
         else
             JsonObjectRequest(QUIZ_URL_START + departments.getDepartmentUrl(categories.getCategoryCode()) + QUIZ_URL_END);
+        startMenu = new Intent(QuizGame.this, StartMenu.class);
 
     }
     @Override
@@ -86,12 +88,21 @@ public class QuizGame extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putString("question", selectedQuestion);
 
-        outState.putString("button_a", "A) " + answerSet[0]);
-        outState.putString("button_b", "B) " + answerSet[1]);
-        outState.putString("button_c", "C) " + answerSet[2]);
-        outState.putString("button_d", "D) " + answerSet[3]);
-        //need to add more
+        outState.putString("button_a", answerSet[0]);
+        outState.putString("button_b", answerSet[1]);
+        outState.putString("button_c", answerSet[2]);
+        outState.putString("button_d", answerSet[3]);
+        //work in progress
 
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            startActivity(startMenu);
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 
     public void userSubmission(View v) {
@@ -135,18 +146,12 @@ public class QuizGame extends AppCompatActivity {
     public void continueGame(View v) {
         Intent returnResult = getIntent();
 
-        Log.i("Correct: ", String.valueOf(IsAnswerCorrect));
-        Log.i("Score", String.valueOf(returnResult.getDataString()));
         if (!IsAnswerCorrect) {
             returnResult.putExtra("score", 0);
             setResult(RESULT_OK, returnResult);
-            Log.i("NOTCORRECT", "HERE");
-            Log.i("Score", String.valueOf(returnResult.getDataString()));
         } else {
             returnResult.putExtra("score", 1);
             setResult(RESULT_OK, returnResult);
-            Log.i("CORRECT", "HERE");
-            Log.i("Score", String.valueOf(returnResult.getDataString()));
         }
         finish();
     }
@@ -226,10 +231,10 @@ public class QuizGame extends AppCompatActivity {
         answerSet[3] = temp;
 
         questionText.setText(selectedQuestion);
-        buttonA.setText("A) " + answerSet[0]);
-        buttonB.setText("B) " + answerSet[1]);
-        buttonC.setText("C) " + answerSet[2]);
-        buttonD.setText("D) " + answerSet[3]);
+        buttonA.setText(answerSet[0]);
+        buttonB.setText(answerSet[1]);
+        buttonC.setText(answerSet[2]);
+        buttonD.setText(answerSet[3]);
 
 
     }
