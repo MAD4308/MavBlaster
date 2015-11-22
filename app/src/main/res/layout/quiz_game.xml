@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="35sp"
+        android:textSize="25sp"
         android:background="@drawable/bg_button_rounded"
         android:id="@+id/categoryTitle"
         android:layout_alignParentTop="true"
@@ -22,7 +22,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:textSize="18sp"
         android:background="@drawable/bg_button_rounded2"
         android:id="@+id/question"
         android:layout_below="@+id/categoryTitle"
@@ -34,7 +34,7 @@
         android:background="@drawable/bg_button_rounded2"
         android:id="@+id/A"
         android:onClick="userSubmission"
-        android:textSize="15sp"
+        android:textSize="12sp"
         android:layout_marginBottom="20dp"
         android:layout_above="@+id/B"
         android:layout_alignParentLeft="true"
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_button_rounded2"
         android:id="@+id/B"
-        android:textSize="15sp"
+        android:textSize="12sp"
         android:layout_marginBottom="20dp"
         android:onClick="userSubmission"
         android:layout_above="@+id/C"/>
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_button_rounded2"
         android:id="@+id/C"
-        android:textSize="15sp"
+        android:textSize="12sp"
         android:layout_marginBottom="20dp"
         android:onClick="userSubmission"
         android:layout_above="@+id/D"
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_button_rounded2"
         android:id="@+id/D"
-        android:textSize="15sp"
+        android:textSize="12sp"
         android:layout_marginBottom="20dp"
         android:onClick="userSubmission"
         android:layout_alignParentBottom="true"
@@ -80,7 +80,17 @@
         android:background="@drawable/bg_button_rounded_mav"
         android:id="@+id/returnId"
         android:onClick="continueGame"
-        android:textSize="35sp"
+        android:textSize="25sp"
         android:layout_marginTop="350dp"
         android:layout_centerHorizontal="true" />
+
+    <ProgressBar
+        style="@style/CustomProgressBar"
+        android:layout_width="500dp"
+        android:layout_height="30dp"
+        android:id="@+id/timerBar"
+        android:layout_above="@+id/A"
+        android:layout_centerHorizontal="true"
+        android:max="20000" />
+
 </RelativeLayout>

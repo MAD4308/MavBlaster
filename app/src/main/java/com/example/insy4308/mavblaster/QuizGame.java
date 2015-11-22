@@ -1,12 +1,14 @@
 package com.example.insy4308.mavblaster;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
@@ -38,7 +40,9 @@ public class QuizGame extends AppCompatActivity {
     boolean IsAnswerCorrect = false;
     private String correctAnswer;
     private String selectedQuestion;
-    private String[] answerSet;
+    private String[] answerSet = new String[4];
+    private long timerScore;
+    private long savedSeconds;
 
     private TextView categoryTitle;
     private TextView questionText;
@@ -47,6 +51,8 @@ public class QuizGame extends AppCompatActivity {
     private Button buttonC;
     private Button buttonD;
     private Button returnToGame;
+    private ProgressBar timerBar;
+    private CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +71,7 @@ public class QuizGame extends AppCompatActivity {
         buttonC = (Button) findViewById(R.id.C);
         buttonD = (Button) findViewById(R.id.D);
         returnToGame = (Button) findViewById(R.id.returnId);
+        timerBar = (ProgressBar) findViewById(R.id.timerBar);
 
         returnToGame.setVisibility(View.GONE);
 
@@ -75,11 +82,19 @@ public class QuizGame extends AppCompatActivity {
             buttonB.setText(savedInstanceState.getString("button_b"));
             buttonC.setText(savedInstanceState.getString("button_c"));
             buttonD.setText(savedInstanceState.getString("button_d"));
-            //work in progress
+
+            selectedQuestion = savedInstanceState.getString("question");
+            answerSet[0] = savedInstanceState.getString("button_a");
+            answerSet[1] = savedInstanceState.getString("button_b");
+            answerSet[2] = savedInstanceState.getString("button_c");
+            answerSet[3] = savedInstanceState.getString("button_d");
+
+            setCountDownTimer(savedInstanceState.getInt("seconds"));
 
         }
-        else
+        else {
             JsonObjectRequest(QUIZ_URL_START + departments.getDepartmentUrl(categories.getCategoryCode()) + QUIZ_URL_END);
+        }
         startMenu = new Intent(QuizGame.this, StartMenu.class);
 
     }
@@ -92,8 +107,8 @@ public class QuizGame extends AppCompatActivity {
         outState.putString("button_b", answerSet[1]);
         outState.putString("button_c", answerSet[2]);
         outState.putString("button_d", answerSet[3]);
-        //work in progress
 
+        outState.putInt("seconds", (int)savedSeconds);
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -134,6 +149,8 @@ public class QuizGame extends AppCompatActivity {
         String questionAsked = questionText.getText().toString();
         questionText.setTextSize(25);
         questionText.setText(questionAsked + ":\nThe Correct Answer:" + answer);
+        timerBar.setVisibility(v.GONE);
+        countDownTimer.cancel();
 
         buttonA.setVisibility(v.GONE);
         buttonB.setVisibility(v.GONE);
@@ -150,7 +167,7 @@ public class QuizGame extends AppCompatActivity {
             returnResult.putExtra("score", 0);
             setResult(RESULT_OK, returnResult);
         } else {
-            returnResult.putExtra("score", 1);
+            returnResult.putExtra("score", (int)timerScore);
             setResult(RESULT_OK, returnResult);
         }
         finish();
@@ -164,8 +181,8 @@ public class QuizGame extends AppCompatActivity {
                     JSONArray terms = response.getJSONArray("terms");
                     String[] randomAnswers = compileRandomAnswers(terms);
                     String[] questionKey = compileQuestionKey(terms);
-                    String question = "";
-                    String answer = "";
+                    String question;
+                    String answer;
                     Random rand = new Random();
 
                     for (int j = 0; j < terms.length(); j++) {
@@ -182,8 +199,7 @@ public class QuizGame extends AppCompatActivity {
                         }
                     }
                     setQuestionAnswerSet(rand, questionKey, randomAnswers);
-
-
+                    setCountDownTimer(20);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -235,8 +251,6 @@ public class QuizGame extends AppCompatActivity {
         buttonB.setText(answerSet[1]);
         buttonC.setText(answerSet[2]);
         buttonD.setText(answerSet[3]);
-
-
     }
 
     public String[] compileQuestionKey(JSONArray terms) {
@@ -265,5 +279,30 @@ public class QuizGame extends AppCompatActivity {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void setCountDownTimer(int seconds)
+    {
+        countDownTimer = new CountDownTimer(seconds*1000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                timerBar.setProgress((int)millisUntilFinished);
+                timerScore = millisUntilFinished/10;
+                savedSeconds = millisUntilFinished/1000;
+            }
+
+            public void onFinish() {
+                timerBar.setProgress(0);
+                timerScore = 0;
+                buttonA.setVisibility(View.GONE);
+                buttonB.setVisibility(View.GONE);
+                buttonC.setVisibility(View.GONE);
+                buttonD.setVisibility(View.GONE);
+                returnToGame.setText("Next Question");
+                returnToGame.setVisibility(View.VISIBLE);
+                timerBar.setVisibility(View.GONE);
+
+            }
+        }.start();
     }
 }
