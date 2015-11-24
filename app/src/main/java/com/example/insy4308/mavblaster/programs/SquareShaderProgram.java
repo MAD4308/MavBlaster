@@ -9,4 +9,9 @@ public class SquareShaderProgram extends ShaderProgram {
         super(context, R.raw.square_vertex_shader,
                 R.raw.square_fragment_shader);
     }
+
+    public void setUniforms(float[] matrix, int textureId) {
+
+
+    }
 }

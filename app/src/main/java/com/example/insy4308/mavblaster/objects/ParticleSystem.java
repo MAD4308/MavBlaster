@@ -10,11 +10,11 @@ import static android.opengl.GLES20.glEnable;
 import static android.opengl.Matrix.multiplyMM;
 import static android.opengl.Matrix.setIdentityM;
 import static android.opengl.Matrix.translateM;
+import static com.example.insy4308.mavblaster.mavUtilities.Constants.*;
 
 import android.content.Context;
 import android.graphics.Color;
 
-import com.example.insy4308.mavblaster.mavUtilities.Constants;
 import com.example.insy4308.mavblaster.mavUtilities.VertexArray;
 import com.example.insy4308.mavblaster.programs.ParticleShaderProgram;
 import com.example.insy4308.mavblaster.mavUtilities.Geometry.Point;
@@ -34,13 +34,13 @@ public class ParticleSystem {
 
     public ParticleSystem(int maxParticleCount, Context context) {
         particleProgram = new ParticleShaderProgram(context);
-        particles = new float[maxParticleCount * Constants.TOTAL_COMPONENT_COUNT];
+        particles = new float[maxParticleCount * TOTAL_COMPONENT_COUNT];
         vertexArray = new VertexArray(particles);
         this.maxParticleCount = maxParticleCount;
     }
 
     public void addParticle(Point position, int color, Vector direction, float particleStartTime) {
-        final int particleOffset = nextParticle * Constants.TOTAL_COMPONENT_COUNT;
+        final int particleOffset = nextParticle * TOTAL_COMPONENT_COUNT;
 
         int currentOffset = particleOffset;
         nextParticle++;
@@ -67,21 +67,21 @@ public class ParticleSystem {
 
         particles[currentOffset++] = particleStartTime;
 
-        vertexArray.updateBuffer(particles, particleOffset, Constants.TOTAL_COMPONENT_COUNT);
+        vertexArray.updateBuffer(particles, particleOffset, TOTAL_COMPONENT_COUNT);
     }
 
     public void bindData() {
         int dataOffset = 0;
-        vertexArray.setVertexAttribPointer(dataOffset, particleProgram.getPositionAttributeLocation(), Constants.POSITION_COMPONENT_COUNT, Constants.STRIDE);
-        dataOffset += Constants.POSITION_COMPONENT_COUNT;
+        vertexArray.setVertexAttribPointer(dataOffset, particleProgram.getPositionAttributeLocation(), POSITION_COMPONENT_COUNT, STRIDE);
+        dataOffset += POSITION_COMPONENT_COUNT;
 
-        vertexArray.setVertexAttribPointer(dataOffset, particleProgram.getColorAttributeLocation(), Constants.COLOR_COMPONENT_COUNT, Constants.STRIDE);
-        dataOffset += Constants.COLOR_COMPONENT_COUNT;
+        vertexArray.setVertexAttribPointer(dataOffset, particleProgram.getColorAttributeLocation(), COLOR_COMPONENT_COUNT, STRIDE);
+        dataOffset += COLOR_COMPONENT_COUNT;
 
-        vertexArray.setVertexAttribPointer(dataOffset, particleProgram.getDirectionVectorAttributeLocation(), Constants.VECTOR_COMPONENT_COUNT, Constants.STRIDE);
-        dataOffset += Constants.VECTOR_COMPONENT_COUNT;
+        vertexArray.setVertexAttribPointer(dataOffset, particleProgram.getDirectionVectorAttributeLocation(), VECTOR_COMPONENT_COUNT, STRIDE);
+        dataOffset += VECTOR_COMPONENT_COUNT;
 
-        vertexArray.setVertexAttribPointer(dataOffset, particleProgram.getParticleStartTimeAttributeLocation(), Constants.PARTICLE_START_TIME_COMPONENT_COUNT, Constants.STRIDE);
+        vertexArray.setVertexAttribPointer(dataOffset, particleProgram.getParticleStartTimeAttributeLocation(), PARTICLE_START_TIME_COMPONENT_COUNT, STRIDE);
     }
 
     public void drawParticles(float[] viewMatrix, float[] viewProjectionMatrix, float[] projectionMatrix, ArrayList<ParticleShooter> particleShooters, long globalStartTime, int particleTexture) {
