@@ -99,7 +99,7 @@ public class QuizGameSpin extends AppCompatActivity implements View.OnClickListe
                 score += result;
 
                 Log.i("Score= ", String.valueOf(score));
-                if(tries>=10){
+                if(tries>=2){
                     departments.attachDeptTo(finalScore);
                     finalScore.putExtra("score",score);
                     startActivity(finalScore);
