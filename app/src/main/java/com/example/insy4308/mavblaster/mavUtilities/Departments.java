@@ -13,10 +13,12 @@ public enum Departments {
     MARKETING(MKGT);
 
     private int departmentCode;
+    private String departmentName;
     private static final String name = Departments.class.getName();
 
-    private Departments(int i){
+    Departments(int i){
         departmentCode = i;
+        departmentName = DEPT_NAME[i-1];
     }
     public void attachDeptTo(Intent intent){
         intent.putExtra(name, ordinal());
@@ -28,8 +30,12 @@ public enum Departments {
     public int getDepartmentCode() {
         return departmentCode;
     }
+    public String getDepartmentName(){
 
+        return departmentName;
+    }
     public String getDepartmentUrl(int i) {
         return SET_URLS[departmentCode-1][i - 1];
     }
+
 }

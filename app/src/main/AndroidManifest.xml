@@ -9,14 +9,17 @@
     <!--Allow for internet access to retrieve JSON data from Quizlet API-->
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!--Allow for internet access to retrieve JSON data from Quizlet API-->
-    <uses-permission android:name="android.permission.INTERNET" />
+    <provider android:authorities="com.facebook.app.FacebookContentProvider506043582895237"
+        android:name="com.facebook.FacebookContentProvider"
+        android:exported="true"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
         <activity android:name=".StartMenu" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,8 +33,12 @@
         </activity>
         <activity android:name=".QuizGame" >
         </activity>
-        <activity android:name=".FinalScore" >
+        <activity android:name=".FinalScore">
         </activity>
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name"/>
     </application>
 
 </manifest>

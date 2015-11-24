@@ -15,7 +15,7 @@ public enum Categories {
     private int categoryCode;
     private static final String name = Categories.class.getName();
 
-    private Categories(int i){
+    Categories(int i){
         categoryCode = i;
     }
     public void attachCatTo(Intent intent) {
@@ -27,6 +27,9 @@ public enum Categories {
     }
     public int getCategoryCode() {
         return categoryCode;
+    }
+    public String getCategoryName(int i){
+        return CAT_NAME[i-1][categoryCode-1];
     }
 }
 

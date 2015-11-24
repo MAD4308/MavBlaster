@@ -3,38 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondotest"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/fondotest"
     tools:context="com.example.insy4308.mavblaster.QuizGame">
-<!--
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/buttonTest"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-        -->
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/CategoryTItle"
         android:textSize="15sp"
         android:background="@drawable/bg_button_rounded"
         android:id="@+id/categoryTitle"
-        android:layout_marginLeft="35dp"
-        android:layout_marginStart="35dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_above="@+id/question"
+        android:layout_toLeftOf="@+id/returnId"
+        android:layout_toStartOf="@+id/returnId"
+        android:layout_marginRight="39dp"
+        android:layout_marginEnd="39dp" />
 
     <TextView
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:text="@string/Question"
         android:id="@+id/question"
         android:background="@drawable/bg_button_rounded2"
         android:textSize="20sp"
@@ -51,7 +41,7 @@
         android:background="@drawable/bg_button_rounded2"
         android:id="@+id/A"
         android:onClick="userSubmission"
-        android:layout_alignTop="@+id/categoryTitle"
+        android:layout_alignTop="@+id/question"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -63,10 +53,10 @@
         android:onClick="userSubmission"
         android:background="@drawable/bg_button_rounded2"
         android:id="@+id/B"
-        android:layout_alignTop="@+id/question"
-        android:layout_alignLeft="@+id/A"
-        android:layout_alignStart="@+id/A"
-        android:layout_marginTop="15dp"/>
+        android:layout_below="@+id/A"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="18dp" />
 
     <Button
         android:layout_width="300dp"
@@ -76,10 +66,10 @@
         android:onClick="userSubmission"
         android:background="@drawable/bg_button_rounded2"
         android:id="@+id/C"
-        android:layout_alignBottom="@+id/question"
-        android:layout_alignLeft="@+id/B"
-        android:layout_alignStart="@+id/B"
-        android:layout_marginBottom="36dp" />
+        android:layout_marginBottom="17dp"
+        android:layout_above="@+id/D"
+        android:layout_alignLeft="@+id/D"
+        android:layout_alignStart="@+id/D" />
 
     <Button
         android:layout_width="300dp"
@@ -89,20 +79,25 @@
         android:onClick="userSubmission"
         android:background="@drawable/bg_button_rounded2"
         android:id="@+id/D"
-        android:layout_alignParentBottom="true"
+        android:layout_alignBottom="@+id/question"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="300dp"
         android:layout_height="30dp"
-        android:text="@string/returnToGame"
         android:textSize="15sp"
         android:onClick="continueGame"
-        android:background="@drawable/bg_button_rounded_mav"
         android:id="@+id/returnId"
         android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/C"
-        android:layout_alignStart="@+id/C" />
+        android:layout_centerHorizontal="true" />
+    <ProgressBar
+        style="@style/CustomProgressBar"
+        android:layout_width="500dp"
+        android:layout_height="30dp"
+        android:id="@+id/timerBar"
+        android:max="20000"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

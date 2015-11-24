@@ -23,6 +23,7 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.department_selection);
+        getSupportActionBar().hide();
 
         iNSY = (Button) findViewById(R.id.insy);
         fINA = (Button) findViewById(R.id.fina);

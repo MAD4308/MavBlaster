@@ -2,19 +2,5 @@
     <string name="app_name">MavBlaster</string>
     <string name="start">Start</string>
     <string name="uta_banner">UNIVERSITY OF TEXAS AT ARLINGTON</string>
-    <string name="Question">Test question</string>
-    <string name="AnswerA">Answer A</string>
-    <string name="AnswerB">AnswerB</string>
-    <string name="AnswerC">Answer C</string>
-    <string name="AnswerD">Answer D</string>
-    <string name="ButtonA">Button A</string>
-    <string name="ButtonB">Button B</string>
-    <string name="ButtonC">Button C</string>
-    <string name="ButtonD">Button D</string>
-    <string name="QuestionText">Question Text</string>
-    <string name="Question_land">Question Text</string>
-    <string name="CategoryTitle">Category TItle</string>
-    <string name="CategoryTItle">Category Title</string>
-    <string name="ReturnToGame">Continue</string>
-    <string name="returnToGame">Continue</string>
+    <string name="facebook_app_id">506043582895237</string>
 </resources>

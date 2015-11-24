@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,11 +18,12 @@ import static com.example.insy4308.mavblaster.mavUtilities.Departments.*;
 public class QuizGameSpin extends AppCompatActivity implements View.OnClickListener{
 
     private Intent quizGame = null;
-    Button button1;
-    Departments departments;
-    static final int REQUEST_CODE = 1;
-    private int Score = 0;
-
+    private Intent finalScore = null;
+    private Intent startMenu = null;
+    private Departments departments;
+    private static final int REQUEST_CODE = 1;
+    private int score = 0;
+    private int tries = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +31,7 @@ public class QuizGameSpin extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().hide();
         departments= detachDeptFrom(getIntent());
 
-        button1 = (Button) findViewById(R.id.button);
+        Button button1 = (Button) findViewById(R.id.button);
         Button button2 = (Button) findViewById(R.id.button2);
         Button button3 = (Button) findViewById(R.id.button3);
         Button button4 = (Button) findViewById(R.id.button4);
@@ -42,10 +44,21 @@ public class QuizGameSpin extends AppCompatActivity implements View.OnClickListe
         button5.setOnClickListener(this);
 
         quizGame = new Intent(QuizGameSpin.this, QuizGame.class);
+        finalScore = new Intent(QuizGameSpin.this, FinalScore.class);
+        startMenu = new Intent(QuizGameSpin.this, StartMenu.class);
     }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            startActivity(startMenu);
+            return true;
+        }
 
+        return super.onKeyDown(keyCode, event);
+    }
     public void onClick(View v) {
         switch (v.getId()) {
+
             case R.id.button:
                 CATEGORY1.attachCatTo(quizGame);
                 departments.attachDeptTo(quizGame);
@@ -76,14 +89,21 @@ public class QuizGameSpin extends AppCompatActivity implements View.OnClickListe
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data); // sends the same stuff to your parent
+        super.onActivityResult(requestCode, resultCode, data);
 
+        tries++;
         if (requestCode == REQUEST_CODE){
             if (resultCode==RESULT_OK){
-                //
-                int result = data.getIntExtra("score", 0);
-                Score += result;
-                Log.v("Score= ", String.valueOf(Score));
+
+                int result = data.getIntExtra("score",0);
+                score += result;
+
+                Log.i("Score= ", String.valueOf(score));
+                if(tries>=10){
+                    departments.attachDeptTo(finalScore);
+                    finalScore.putExtra("score",score);
+                    startActivity(finalScore);
+                }
             }
         }
     }
