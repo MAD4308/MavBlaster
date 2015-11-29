@@ -1,76 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.insy4308.mavblaster.DepartmentSelection"
-    android:background="@drawable/background2">
+    xmlns:tools="http://schemas.android.com/tools">
+    <com.example.insy4308.mavblaster.openGLES2.OurGLSurfaceView
+        android:id="@+id/department_surface_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context="com.example.insy4308.mavblaster.DepartmentSelection"
+        android:layoutMode="opticalBounds">
 
-    <Button
-        android:id="@+id/fina"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:background="@drawable/fina_icon"
-        android:layout_below="@+id/insy"
-        android:layout_toLeftOf="@+id/imageView"
-        android:layout_toStartOf="@+id/imageView" />
+        <Button
+            android:id="@+id/fina"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="@drawable/fina_icon"
+            android:layout_below="@+id/insy"
+            android:layout_toLeftOf="@+id/imageView"
+            android:layout_toStartOf="@+id/imageView" />
 
-    <Button
-        android:id="@+id/mana"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:background="@drawable/mana_icon"
-        android:layout_below="@+id/insy"
-        android:layout_alignLeft="@+id/econ"
-        android:layout_alignStart="@+id/econ" />
+        <Button
+            android:id="@+id/mana"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="@drawable/mana_icon"
+            android:layout_below="@+id/insy"
+            android:layout_alignLeft="@+id/econ"
+            android:layout_alignStart="@+id/econ" />
 
-    <Button
-        android:id="@+id/acct"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:background="@drawable/acct_icon"
-        android:layout_above="@+id/mktg"
-        android:layout_toLeftOf="@+id/imageView"
-        android:layout_toStartOf="@+id/imageView" />
+        <Button
+            android:id="@+id/acct"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="@drawable/acct_icon"
+            android:layout_above="@+id/mktg"
+            android:layout_toLeftOf="@+id/imageView"
+            android:layout_toStartOf="@+id/imageView" />
 
-    <Button
-        android:id="@+id/econ"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:background="@drawable/econ_icon"
-        android:layout_above="@+id/mktg"
-        android:layout_toRightOf="@+id/imageView"
-        android:layout_toEndOf="@+id/imageView" />
+        <Button
+            android:id="@+id/econ"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="@drawable/econ_icon"
+            android:layout_above="@+id/mktg"
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_toEndOf="@+id/imageView" />
 
-    <Button
-        android:id="@+id/mktg"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:background="@drawable/mark_icon"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp" />
+        <Button
+            android:id="@+id/mktg"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="@drawable/mark_icon"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp" />
 
-    <Button
-        android:id="@+id/insy"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:background="@drawable/insy_icon"
-        android:layout_marginTop="20dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/mktg"
-        android:layout_alignStart="@+id/mktg" />
+        <Button
+            android:id="@+id/insy"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="@drawable/insy_icon"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignLeft="@+id/mktg"
+            android:layout_alignStart="@+id/mktg" />
 
-    <ImageView
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:id="@+id/imageView"
-        android:src="@drawable/choose"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:id="@+id/imageView"
+            android:src="@drawable/choose"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
 
-</RelativeLayout>
+    </RelativeLayout>
+</FrameLayout>
