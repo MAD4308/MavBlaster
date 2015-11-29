@@ -10,7 +10,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.opengl.GLSurfaceView.Renderer;
+import android.opengl.GLSurfaceView;
 
 import com.example.insy4308.mavblaster.R;
 import com.example.insy4308.mavblaster.objects.Skybox;
@@ -23,7 +23,7 @@ import com.example.insy4308.mavblaster.mavUtilities.TextureHelper;
 
 import java.util.ArrayList;
 
-public class StartRenderer implements Renderer {
+public class StartRenderer implements GLSurfaceView.Renderer {
     private final Context context;
 
     private final float[] projectionMatrix = new float[16];
@@ -68,7 +68,7 @@ public class StartRenderer implements Renderer {
         final Vector particleDirectionLeft = new Vector(-0.1f, 1.0f, 0f);
         final Vector particleDirectionRight = new Vector(0.1f, 1.0f, 0f);
         final float angleVarianceInDegrees = 10f;
-        final float speedVariance = 1f;
+        final float speedVariance = 1.5f;
 
         particleShooters.add(new ParticleShooter(new Point(-0.3f, -3.0f, 0f), particleDirectionLeft, Color.rgb(88, 211, 247), angleVarianceInDegrees, speedVariance));
         particleShooters.add(new ParticleShooter(new Point(0f, -3.0f, 0f), particleDirection, Color.rgb(245, 128, 38), angleVarianceInDegrees, speedVariance));
@@ -76,9 +76,9 @@ public class StartRenderer implements Renderer {
 
         particleTexture = TextureHelper.loadTexture(context, R.drawable.particle);
         skyboxTexture = TextureHelper.loadCubeMap(context, new int[] {
-        /*negx*/R.drawable.right_galaxy, /*posx*/R.drawable.left_galaxy,
-        /*negy*/R.drawable.down_galaxy, /*posy*/R.drawable.up_galaxy,
-        /*negz*/R.drawable.front_galaxy, /*posz*/R.drawable.back_galaxy});
+        /*negx*/R.drawable.space_right, /*posx*/R.drawable.space_left,
+        /*negy*/R.drawable.space_down, /*posy*/R.drawable.space_up,
+        /*negz*/R.drawable.space_front, /*posz*/R.drawable.space_back});
     }
 
     @Override

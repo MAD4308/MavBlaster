@@ -1,9 +1,11 @@
 package com.example.insy4308.mavblaster;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -20,6 +22,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.insy4308.mavblaster.mavUtilities.Categories;
 import com.example.insy4308.mavblaster.mavUtilities.Departments;
+import com.example.insy4308.mavblaster.openGLES2.OurGLSurfaceView;
+import com.example.insy4308.mavblaster.openGLES2.SkyboxRenderer;
+import com.example.insy4308.mavblaster.openGLES2.StartRenderer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,7 +38,10 @@ import static com.example.insy4308.mavblaster.mavUtilities.Constants.*;
 import static com.example.insy4308.mavblaster.mavUtilities.Departments.*;
 import static com.example.insy4308.mavblaster.mavUtilities.Categories.*;
 
-public class QuizGame extends AppCompatActivity {
+public class QuizGame extends Activity {
+
+    private OurGLSurfaceView glSurfaceView;
+    private SkyboxRenderer renderer;
 
     private Intent startMenu = null;
     private Map<String, String> answers = new HashMap<>();
@@ -58,7 +66,17 @@ public class QuizGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz_game);
-        getSupportActionBar().hide();
+
+        glSurfaceView = (OurGLSurfaceView) findViewById (R.id.quiz_game_surface_view);
+
+        glSurfaceView.setEGLContextClientVersion(2);
+
+        final DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+        renderer = new SkyboxRenderer(this);
+        glSurfaceView.setRenderer(renderer, displayMetrics.density);
+
         final Departments departments = detachDeptFrom(getIntent());
         final Categories categories = detachCatFrom(getIntent());
 

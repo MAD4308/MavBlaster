@@ -1,14 +1,22 @@
 package com.example.insy4308.mavblaster;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.insy4308.mavblaster.openGLES2.OurGLSurfaceView;
+import com.example.insy4308.mavblaster.openGLES2.SkyboxRenderer;
+import com.facebook.appevents.AppEventsLogger;
+
 import static com.example.insy4308.mavblaster.mavUtilities.Departments.*;
 
-public class DepartmentSelection extends AppCompatActivity implements View.OnClickListener {
+public class DepartmentSelection extends Activity implements View.OnClickListener {
+
+    private OurGLSurfaceView glSurfaceView;
+    private SkyboxRenderer renderer;
 
     private Intent quizSpinner = null;
     private Button iNSY;
@@ -22,7 +30,15 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.department_selection);
-        getSupportActionBar().hide();
+
+        glSurfaceView = (OurGLSurfaceView) findViewById(R.id.department_surface_view);
+        glSurfaceView.setEGLContextClientVersion(2);
+
+        final DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+        renderer = new SkyboxRenderer(this);
+        glSurfaceView.setRenderer(renderer, displayMetrics.density);
 
         iNSY = (Button) findViewById(R.id.insy);
         fINA = (Button) findViewById(R.id.fina);
@@ -41,6 +57,7 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
 
         quizSpinner = new Intent(DepartmentSelection.this, QuizGameSpin.class);
     }
+
     public void onClick(View v) {
         switch (v.getId()) {
 
@@ -70,5 +87,19 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
                 break;
 
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        glSurfaceView.onPause();
+        AppEventsLogger.deactivateApp(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        glSurfaceView.onResume();
+        AppEventsLogger.activateApp(this);
     }
 }
