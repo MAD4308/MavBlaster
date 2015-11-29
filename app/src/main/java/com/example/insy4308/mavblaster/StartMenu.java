@@ -8,12 +8,12 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.insy4308.mavblaster.openGLES2.StartGLSurfaceView;
+import com.example.insy4308.mavblaster.openGLES2.OurGLSurfaceView;
 import com.example.insy4308.mavblaster.openGLES2.StartRenderer;
 import com.facebook.appevents.AppEventsLogger;
 
 public class StartMenu extends Activity {
-    private StartGLSurfaceView glSurfaceView;
+    private OurGLSurfaceView glSurfaceView;
     private StartRenderer renderer;
     Intent departmentSelection = null;
 
@@ -23,7 +23,7 @@ public class StartMenu extends Activity {
             setContentView(R.layout.start_menu);
 
             Button start = (Button) findViewById(R.id.start);
-            glSurfaceView = (StartGLSurfaceView) findViewById (R.id.start_surface_view);
+            glSurfaceView = (OurGLSurfaceView) findViewById (R.id.start_surface_view);
 
             glSurfaceView.setEGLContextClientVersion(2);
 
@@ -54,19 +54,19 @@ public class StartMenu extends Activity {
         return super.onKeyDown(keyCode, event);
     }
 
-        @Override
-        protected void onPause() {
-            super.onPause();
-                glSurfaceView.onPause();
-            AppEventsLogger.deactivateApp(this);
-        }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        glSurfaceView.onPause();
+        AppEventsLogger.deactivateApp(this);
+    }
 
-        @Override
-        protected void onResume() {
-            super.onResume();
-                glSurfaceView.onResume();
-            AppEventsLogger.activateApp(this);
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        glSurfaceView.onResume();
+        AppEventsLogger.activateApp(this);
+    }
 }
 
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
-    <com.example.insy4308.mavblaster.openGLES2.StartGLSurfaceView
+    <com.example.insy4308.mavblaster.openGLES2.OurGLSurfaceView
         android:id="@+id/start_surface_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

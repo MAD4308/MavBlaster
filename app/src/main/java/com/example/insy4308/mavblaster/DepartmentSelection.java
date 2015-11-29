@@ -71,4 +71,14 @@ public class DepartmentSelection extends AppCompatActivity implements View.OnCli
 
         }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 }

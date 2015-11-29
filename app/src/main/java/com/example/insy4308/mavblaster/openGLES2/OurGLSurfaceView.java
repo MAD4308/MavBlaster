@@ -5,22 +5,22 @@ import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 
 
-public class StartGLSurfaceView extends GLSurfaceView{
+public class OurGLSurfaceView extends GLSurfaceView{
 
-    private StartRenderer renderer;
+    private Renderer renderer;
     private float density;
     float previousX;
     float previousY;
 
-    public StartGLSurfaceView(Context context){
+    public OurGLSurfaceView(Context context){
         super(context);
     }
 
-    public StartGLSurfaceView(Context context, AttributeSet attributes){
+    public OurGLSurfaceView(Context context, AttributeSet attributes){
         super(context, attributes);
     }
 
-    public void setRenderer(StartRenderer sRenderer, float sDensity){
+    public void setRenderer(Renderer sRenderer, float sDensity){
         renderer = sRenderer;
         density = sDensity;
         super.setRenderer(sRenderer);
