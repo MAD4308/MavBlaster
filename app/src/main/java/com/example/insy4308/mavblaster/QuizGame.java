@@ -3,6 +3,7 @@ package com.example.insy4308.mavblaster;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -42,23 +44,25 @@ public class QuizGame extends Activity {
 
     private OurGLSurfaceView glSurfaceView;
     private SkyboxRenderer renderer;
+    private Handler handler;
+    private Intent returnResult;
 
     private Intent startMenu = null;
     private Map<String, String> answers = new HashMap<>();
-    boolean IsAnswerCorrect = false;
+    private boolean IsAnswerCorrect = false;
     private String correctAnswer;
     private String selectedQuestion;
     private String[] answerSet = new String[4];
     private long timerScore;
     private long savedSeconds;
 
+    private ImageView imageView;
     private TextView categoryTitle;
     private TextView questionText;
     private Button buttonA;
     private Button buttonB;
     private Button buttonC;
     private Button buttonD;
-    private Button returnToGame;
     private ProgressBar timerBar;
     private CountDownTimer countDownTimer;
 
@@ -88,11 +92,7 @@ public class QuizGame extends Activity {
         buttonB = (Button) findViewById(R.id.B);
         buttonC = (Button) findViewById(R.id.C);
         buttonD = (Button) findViewById(R.id.D);
-        returnToGame = (Button) findViewById(R.id.returnId);
         timerBar = (ProgressBar) findViewById(R.id.timerBar);
-
-        returnToGame.setVisibility(View.GONE);
-
 
         if(savedInstanceState !=null){
             questionText.setText(savedInstanceState.getString("question"));
@@ -111,6 +111,12 @@ public class QuizGame extends Activity {
 
         }
         else {
+            questionText.setVisibility(View.GONE);
+            buttonA.setVisibility(View.GONE);
+            buttonB.setVisibility(View.GONE);
+            buttonC.setVisibility(View.GONE);
+            buttonD.setVisibility(View.GONE);
+            timerBar.setVisibility(View.GONE);
             JsonObjectRequest(QUIZ_URL_START + departments.getDepartmentUrl(categories.getCategoryCode()) + QUIZ_URL_END);
         }
         startMenu = new Intent(QuizGame.this, StartMenu.class);
@@ -140,7 +146,9 @@ public class QuizGame extends Activity {
 
     public void userSubmission(View v) {
         questionText = (TextView) findViewById(R.id.question);
+        imageView = (ImageView) findViewById(R.id.imageView2);
         String answer = answers.get(questionText.getText().toString());
+
         switch (v.getId()) {
             case R.id.A:
                 if (answer.equals(buttonA.getText())) {
@@ -164,9 +172,7 @@ public class QuizGame extends Activity {
                 break;
         }
 
-        String questionAsked = questionText.getText().toString();
-        questionText.setTextSize(25);
-        questionText.setText(questionAsked + ":\nThe Correct Answer:" + answer);
+        questionText.setVisibility(v.GONE);
         timerBar.setVisibility(v.GONE);
         countDownTimer.cancel();
 
@@ -174,21 +180,27 @@ public class QuizGame extends Activity {
         buttonB.setVisibility(v.GONE);
         buttonC.setVisibility(v.GONE);
         buttonD.setVisibility(v.GONE);
-        returnToGame.setText("Next Question");
-        returnToGame.setVisibility(v.VISIBLE);
+        continueGame();
     }
 
-    public void continueGame(View v) {
-        Intent returnResult = getIntent();
+    public void continueGame() {
+        returnResult = getIntent();
 
         if (!IsAnswerCorrect) {
+            imageView.setBackgroundResource(R.drawable.incorrect);
             returnResult.putExtra("score", 0);
             setResult(RESULT_OK, returnResult);
         } else {
+            imageView.setBackgroundResource(R.drawable.correct);
             returnResult.putExtra("score", (int)timerScore);
             setResult(RESULT_OK, returnResult);
         }
-        finish();
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                finish();
+            }
+        }, 3000);
     }
 
     public void JsonObjectRequest(String url) {
@@ -269,6 +281,12 @@ public class QuizGame extends Activity {
         buttonB.setText(answerSet[1]);
         buttonC.setText(answerSet[2]);
         buttonD.setText(answerSet[3]);
+        questionText.setVisibility(View.VISIBLE);
+        buttonA.setVisibility(View.VISIBLE);
+        buttonB.setVisibility(View.VISIBLE);
+        buttonC.setVisibility(View.VISIBLE);
+        buttonD.setVisibility(View.VISIBLE);
+        timerBar.setVisibility(View.VISIBLE);
     }
 
     public String[] compileQuestionKey(JSONArray terms) {
@@ -301,25 +319,32 @@ public class QuizGame extends Activity {
 
     public void setCountDownTimer(int seconds)
     {
+        handler = new Handler();
+        imageView = (ImageView) findViewById(R.id.imageView2);
+        returnResult = getIntent();
         countDownTimer = new CountDownTimer(seconds*1000, 1000) {
-
             public void onTick(long millisUntilFinished) {
                 timerBar.setProgress((int)millisUntilFinished);
                 timerScore = millisUntilFinished/10;
                 savedSeconds = millisUntilFinished/1000;
             }
-
             public void onFinish() {
                 timerBar.setProgress(0);
                 timerScore = 0;
+                questionText.setVisibility(View.GONE);
                 buttonA.setVisibility(View.GONE);
                 buttonB.setVisibility(View.GONE);
                 buttonC.setVisibility(View.GONE);
                 buttonD.setVisibility(View.GONE);
-                returnToGame.setText("Next Question");
-                returnToGame.setVisibility(View.VISIBLE);
                 timerBar.setVisibility(View.GONE);
-
+                imageView.setBackgroundResource(R.drawable.times_up);
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        returnResult.putExtra("score", 0);
+                        setResult(RESULT_OK, returnResult);
+                        finish();
+                    }
+                }, 3000);
             }
         }.start();
     }

@@ -81,16 +81,6 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_button_rounded_mav"
-            android:id="@+id/returnId"
-            android:onClick="continueGame"
-            android:textSize="25sp"
-            android:layout_marginTop="350dp"
-            android:layout_centerHorizontal="true" />
-
         <ProgressBar
             style="@style/CustomProgressBar"
             android:layout_width="500dp"
@@ -99,6 +89,13 @@
             android:layout_above="@+id/A"
             android:layout_centerHorizontal="true"
             android:max="20000" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 </FrameLayout>
