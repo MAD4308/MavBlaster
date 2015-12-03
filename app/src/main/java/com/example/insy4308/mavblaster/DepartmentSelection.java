@@ -37,7 +37,7 @@ public class DepartmentSelection extends Activity implements View.OnClickListene
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-        renderer = new SkyboxRenderer(this);
+        renderer = new SkyboxRenderer(this, 0);
         glSurfaceView.setRenderer(renderer, displayMetrics.density);
 
         iNSY = (Button) findViewById(R.id.insy);

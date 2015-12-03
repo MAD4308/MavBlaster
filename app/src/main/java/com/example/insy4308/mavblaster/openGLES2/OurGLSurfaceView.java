@@ -4,13 +4,11 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 
-
 public class OurGLSurfaceView extends GLSurfaceView{
 
-    private Renderer renderer;
+    private QuizRenderer quizRenderer;
+    private SkyboxRenderer skyboxRenderer;
     private float density;
-    float previousX;
-    float previousY;
 
     public OurGLSurfaceView(Context context){
         super(context);
@@ -20,9 +18,18 @@ public class OurGLSurfaceView extends GLSurfaceView{
         super(context, attributes);
     }
 
-    public void setRenderer(Renderer sRenderer, float sDensity){
-        renderer = sRenderer;
-        density = sDensity;
-        super.setRenderer(sRenderer);
+    public void setParticles(boolean start) {
+        skyboxRenderer.setStatus(start);
+    }
+
+    public void setRenderer(QuizRenderer renderer, float density){
+        quizRenderer = renderer;
+        this.density = density;
+        super.setRenderer(renderer);
+    }
+    public void setRenderer(SkyboxRenderer renderer, float density){
+        skyboxRenderer = renderer;
+        this.density = density;
+        super.setRenderer(renderer);
     }
 }

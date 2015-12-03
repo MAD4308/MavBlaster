@@ -49,7 +49,7 @@ public class FinalScore extends Activity {
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-        renderer = new SkyboxRenderer(this);
+        renderer = new SkyboxRenderer(this,0);
         glSurfaceView.setRenderer(renderer, displayMetrics.density);
         TextView scoreDisplay = (TextView) findViewById(R.id.score);
         scoreDisplay.setText(String.valueOf(highScore));

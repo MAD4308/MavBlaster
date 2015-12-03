@@ -24,8 +24,6 @@
             android:background="@drawable/bg_button_rounded"
             android:id="@+id/categoryTitle"
             android:layout_above="@+id/question"
-            android:layout_toLeftOf="@+id/returnId"
-            android:layout_toStartOf="@+id/returnId"
             android:layout_marginRight="39dp"
             android:layout_marginEnd="39dp" />
 

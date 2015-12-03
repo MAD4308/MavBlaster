@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -19,14 +17,12 @@ import android.widget.TextView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.insy4308.mavblaster.mavUtilities.Categories;
 import com.example.insy4308.mavblaster.mavUtilities.Departments;
 import com.example.insy4308.mavblaster.openGLES2.OurGLSurfaceView;
 import com.example.insy4308.mavblaster.openGLES2.SkyboxRenderer;
-import com.example.insy4308.mavblaster.openGLES2.StartRenderer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -78,7 +74,7 @@ public class QuizGame extends Activity {
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-        renderer = new SkyboxRenderer(this);
+        renderer = new SkyboxRenderer(this,0);
         glSurfaceView.setRenderer(renderer, displayMetrics.density);
 
         final Departments departments = detachDeptFrom(getIntent());
@@ -132,6 +128,7 @@ public class QuizGame extends Activity {
         outState.putString("button_c", answerSet[2]);
         outState.putString("button_d", answerSet[3]);
 
+
         outState.putInt("seconds", (int)savedSeconds);
     }
     @Override
@@ -153,21 +150,25 @@ public class QuizGame extends Activity {
             case R.id.A:
                 if (answer.equals(buttonA.getText())) {
                     IsAnswerCorrect = true;
+                    glSurfaceView.setParticles(true);
                 }
                 break;
             case R.id.B:
                 if (answer.equals(buttonB.getText())) {
                     IsAnswerCorrect = true;
+                    glSurfaceView.setParticles(true);
                 }
                 break;
             case R.id.C:
                 if (answer.equals(buttonC.getText())) {
                     IsAnswerCorrect = true;
+                    glSurfaceView.setParticles(true);
                 }
                 break;
             case R.id.D:
                 if (answer.equals(buttonD.getText())) {
                     IsAnswerCorrect = true;
+                    glSurfaceView.setParticles(true);
                 }
                 break;
         }
@@ -281,6 +282,7 @@ public class QuizGame extends Activity {
         buttonB.setText(answerSet[1]);
         buttonC.setText(answerSet[2]);
         buttonD.setText(answerSet[3]);
+
         questionText.setVisibility(View.VISIBLE);
         buttonA.setVisibility(View.VISIBLE);
         buttonB.setVisibility(View.VISIBLE);
