@@ -5,7 +5,8 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 
-import com.example.insy4308.mavblaster.objects.Sprite;
+import com.example.insy4308.mavblaster.R;
+import com.example.insy4308.mavblaster.objects.SpinWheel;
 
 import java.util.Random;
 
@@ -16,7 +17,7 @@ public class QuizRenderer implements GLSurfaceView.Renderer {
 
     private long startTime;
     float animation = 0.0f;
-    Sprite sprite = null;
+    SpinWheel sprite = null;
     int timeSpinning;
     float speedIncrements[];
     Context context;
@@ -39,7 +40,7 @@ public class QuizRenderer implements GLSurfaceView.Renderer {
 
         r = new Random();
 
-        sprite = new Sprite();
+        sprite = new SpinWheel(context, R.drawable.pentagon_wheel2);
     }
 
     @Override
@@ -53,10 +54,20 @@ public class QuizRenderer implements GLSurfaceView.Renderer {
         long currentTime = System.nanoTime();
 
         long time = ((currentTime - startTime)/(1000000000/2)); //get time difference in half seconds
-        if(spinning && time < timeSpinning)
+        if(spinning && time < timeSpinning) {
             animation -= speedIncrements[(int) time];
-        else
+        } else {
+            degreesSpun = (int)sprite.findDegrees();
+            //Log.d("GETTING DEGREE!!!", "DEGREE = " + degreesSpun);
+
+            if(degreesSpun > 18 && degreesSpun < 91)        category = 1;
+            else if (degreesSpun > 90 && degreesSpun < 163) category = 0;
+            else if (degreesSpun < 235)                     category = 4;
+            else if (degreesSpun < 307)                     category = 3;
+            else                                            category = 2;
+
             spinning = false;
+        }
     }
 
     @Override
@@ -68,8 +79,6 @@ public class QuizRenderer implements GLSurfaceView.Renderer {
         setAnimation();
 
         sprite.setRotation(animation*100);
-        sprite.setHeight(0.2f);
-        sprite.setWidth(0.2f);
 
         sprite.draw();
     }
@@ -88,20 +97,7 @@ public class QuizRenderer implements GLSurfaceView.Renderer {
 
         for(int i = 0, j = timeSpinning * 2 - 1; i < (timeSpinning * 2); i++, j--) {
             speedIncrements[i] = (float)j/(timeSpinning * 2 - 1)*startSpeed;
-
-            degreesSpun += speedIncrements[i] * 3060; //THIS NEEDS TESTING
-            Log.d("speedIncrements", "speedIncrements[" + i + "] = " + speedIncrements[i]);
+            //Log.d("speedIncrements", "speedIncrements[" + i + "] = " + speedIncrements[i]);
         }
-
-        Log.d("DegreesSpun", "DegreesSpun before: " + degreesSpun);
-        while (degreesSpun >= 360)
-            degreesSpun -= 360;
-        Log.d("DegreesSpun", "DegreesSpun after: " + degreesSpun);
-
-        if (degreesSpun < 73)       category = 0; //0 - 72
-        else if (degreesSpun < 145) category = 1; // 73 - 144
-        else if (degreesSpun < 217) category = 2; // 145 - 216
-        else if (degreesSpun < 289) category = 3; // 217 - 288
-        else                        category = 4; // 289 - 360
     }
 }
