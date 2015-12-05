@@ -1,4 +1,3 @@
-#version 120
 uniform mat4 u_Matrix;
 uniform float u_Time;
 
@@ -19,5 +18,5 @@ void main()
     currentPosition.y -= gravityFactor;
     gl_Position = u_Matrix * vec4(currentPosition, 1.0);
     //size of particle
-    gl_PointSize = 8.0;
+    gl_PointSize = 25.0;
 }

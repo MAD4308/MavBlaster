@@ -3,9 +3,13 @@ package com.example.insy4308.mavblaster;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+
+import static com.example.insy4308.mavblaster.mavUtilities.Constants.*;
 
 import com.example.insy4308.mavblaster.openGLES2.OurGLSurfaceView;
 import com.example.insy4308.mavblaster.openGLES2.SkyboxRenderer;
@@ -18,7 +22,10 @@ public class DepartmentSelection extends Activity implements View.OnClickListene
     private OurGLSurfaceView glSurfaceView;
     private SkyboxRenderer renderer;
 
+    private Handler handler;
+
     private Intent quizSpinner = null;
+    private Intent startMenu = null;
     private Button iNSY;
     private Button fINA;
     private Button mANA;
@@ -31,13 +38,15 @@ public class DepartmentSelection extends Activity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.department_selection);
 
+        handler = new Handler();
+
         glSurfaceView = (OurGLSurfaceView) findViewById(R.id.department_surface_view);
         glSurfaceView.setEGLContextClientVersion(2);
 
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-        renderer = new SkyboxRenderer(this, 0);
+        renderer = new SkyboxRenderer(this, PARTICLES_0);
         glSurfaceView.setRenderer(renderer, displayMetrics.density);
 
         iNSY = (Button) findViewById(R.id.insy);
@@ -56,6 +65,12 @@ public class DepartmentSelection extends Activity implements View.OnClickListene
         mKTG.setOnClickListener(this);
 
         quizSpinner = new Intent(DepartmentSelection.this, QuizGameSpin.class);
+        startMenu = new Intent(DepartmentSelection.this, StartMenu.class);
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                renderer.setStatus(true);
+            }
+        }, 100);
     }
 
     public void onClick(View v) {
@@ -101,5 +116,14 @@ public class DepartmentSelection extends Activity implements View.OnClickListene
         super.onResume();
         glSurfaceView.onResume();
         AppEventsLogger.activateApp(this);
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            startActivity(startMenu);
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 }

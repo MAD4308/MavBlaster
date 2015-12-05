@@ -10,7 +10,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.opengl.GLSurfaceView;
+import android.opengl.GLSurfaceView.Renderer;
 
 import com.example.insy4308.mavblaster.R;
 import com.example.insy4308.mavblaster.objects.Skybox;
@@ -23,7 +23,7 @@ import com.example.insy4308.mavblaster.mavUtilities.TextureHelper;
 
 import java.util.ArrayList;
 
-public class SkyboxRenderer implements GLSurfaceView.Renderer {
+public class SkyboxRenderer implements Renderer {
     private final Context context;
 
     private boolean start = false;
@@ -36,9 +36,16 @@ public class SkyboxRenderer implements GLSurfaceView.Renderer {
     private final float[] viewMatrix = new float[16];
     private final float[] viewProjectionMatrix = new float[16];
 
+    private int orange = Color.rgb(245, 128, 38);
+    private int blue = Color.rgb(88, 211, 247);
+    private int white = Color.rgb(255, 255, 255);
+    private int yellow = Color.rgb(204, 255, 51);
+
     private Skybox skybox;
     private ParticleSystem particleSystem;
     private ArrayList<ParticleShooter> particleShooters = new ArrayList<>();
+    private ArrayList<Vector> vectors = new ArrayList<>();
+    private ArrayList<Point> points = new ArrayList<>();
 
     private long globalStartTime;
     private int particleTexture;
@@ -69,28 +76,6 @@ public class SkyboxRenderer implements GLSurfaceView.Renderer {
     public void setStatus(boolean status){
         start = status;
     }
-    public void setParticleType(int type) {
-        switch (type) {
-            case 0:
-                particleSystem = new ParticleSystem(100000, context);
-                globalStartTime = System.nanoTime();
-
-                Vector particleDirection = new Vector(0f, 1.0f, 0f);
-                Vector particleDirectionLeft = new Vector(-0.1f, 1.0f, 0f);
-                Vector particleDirectionRight = new Vector(0.1f, 1.0f, 0f);
-                angleVarianceInDegrees = 20f;
-                speedVariance = 5.5f;
-
-                particleShooters.add(new ParticleShooter(new Point(-0.3f, -3.0f, 0f), particleDirectionLeft, Color.rgb(88, 211, 247), angleVarianceInDegrees, speedVariance));
-                particleShooters.add(new ParticleShooter(new Point(0f, -3.0f, 0f), particleDirection, Color.rgb(245, 128, 38), angleVarianceInDegrees, speedVariance));
-                particleShooters.add(new ParticleShooter(new Point(0.3f, -3.0f, 0f), particleDirectionRight, Color.rgb(88, 211, 247), angleVarianceInDegrees, speedVariance));
-
-                particleTexture = TextureHelper.loadTexture(context, R.drawable.particle);
-                break;
-            case 1:
-                break;
-        }
-    }
     @Override
     public void onSurfaceCreated(GL10 glUnused, EGLConfig config) {
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -119,5 +104,76 @@ public class SkyboxRenderer implements GLSurfaceView.Renderer {
         setParticleShooters(start);
         animation += 0.01f;
         backgroundAnimation(1.0f, (float) Math.cos(animation) * 1.5f);
+    }
+    public void setParticleType(int type) {
+        particleSystem = new ParticleSystem(100000, context);
+        globalStartTime = System.nanoTime();
+        switch (type) {
+            case 0:
+
+                vectors.add(new Vector(0f, 1.0f, 0f));
+                vectors.add(new Vector(0f, 1.0f, 0f));
+                vectors.add(new Vector(0f, 1.0f, 0f));
+
+                points.add(new Point(0f, -3.0f, 0f));
+                points.add(new Point(-1f, -3.0f, 0f));
+                points.add(new Point(1f, -3.0f, 0f));
+
+
+                angleVarianceInDegrees = 20f;
+                speedVariance = 1f;
+
+                particleShooters.add(new ParticleShooter(points.get(0), vectors.get(0), orange, angleVarianceInDegrees, speedVariance));
+                particleShooters.add(new ParticleShooter(points.get(1), vectors.get(1), blue, angleVarianceInDegrees, speedVariance));
+                particleShooters.add(new ParticleShooter(points.get(2), vectors.get(2), blue, angleVarianceInDegrees, speedVariance));
+
+                particleTexture = TextureHelper.loadTexture(context, R.drawable.particle_star);
+                break;
+            case 1:
+
+                vectors.add(new Vector(0f, 2.0f, 0f));
+                vectors.add(new Vector(0.7f, 2.0f, 0f));
+                vectors.add(new Vector(-0.7f, 2.0f, 0f));
+
+                points.add(new Point(0f, -2.0f, 0f));
+                points.add(new Point(-0.7f, -2.0f, 0f));
+                points.add(new Point(0.7f, -2.0f, 0f));
+                points.add(new Point(-2.0f, -1.0f, 0f));
+                points.add(new Point(2.0f, -1.0f, 0f));
+
+                angleVarianceInDegrees = 20f;
+                speedVariance = 1f;
+
+                particleShooters.add(new ParticleShooter(points.get(0), vectors.get(0), orange, angleVarianceInDegrees, speedVariance));
+                particleShooters.add(new ParticleShooter(points.get(1), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
+                particleShooters.add(new ParticleShooter(points.get(2), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
+                particleShooters.add(new ParticleShooter(points.get(3), vectors.get(1), yellow, angleVarianceInDegrees, speedVariance));
+                particleShooters.add(new ParticleShooter(points.get(4), vectors.get(2), yellow, angleVarianceInDegrees, speedVariance));
+                particleTexture = TextureHelper.loadTexture(context, R.drawable.arched_star2);
+                break;
+
+            case 2:
+
+                vectors.add(new Vector(0f, 2.0f, 0f));
+                vectors.add(new Vector(0.7f, 2.0f, 0f));
+                vectors.add(new Vector(-0.7f, 2.0f, 0f));
+
+                points.add(new Point(0f, -2.0f, 0f));
+                points.add(new Point(-0.7f, -2.0f, 0f));
+                points.add(new Point(0.7f, -2.0f, 0f));
+                points.add(new Point(-2.0f, -1.0f, 0f));
+                points.add(new Point(2.0f, -1.0f, 0f));
+
+                angleVarianceInDegrees = 20f;
+                speedVariance = 1f;
+
+                particleShooters.add(new ParticleShooter(points.get(0), vectors.get(0), orange, angleVarianceInDegrees, speedVariance));
+                particleShooters.add(new ParticleShooter(points.get(1), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
+                particleShooters.add(new ParticleShooter(points.get(2), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
+                particleShooters.add(new ParticleShooter(points.get(3), vectors.get(1), yellow, angleVarianceInDegrees, speedVariance));
+                particleShooters.add(new ParticleShooter(points.get(4), vectors.get(2), yellow, angleVarianceInDegrees, speedVariance));
+                particleTexture = TextureHelper.loadTexture(context, R.drawable.dust);
+                break;
+        }
     }
 }

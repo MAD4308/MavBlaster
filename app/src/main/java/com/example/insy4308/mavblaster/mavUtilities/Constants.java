@@ -24,6 +24,10 @@ public final class Constants {
     public static final int CAT4 = 4;
     public static final int CAT5 = 5;
 
+    public static final int PARTICLES_0 = 0;
+    public static final int PARTICLES_1 = 1;
+    public static final int PARTICLES_2 = 2;
+
     public static final float EYE_X = 0.0f;
     public static final float EYE_Y = 0.0f;
     public static final float EYE_Z = -0.5f;

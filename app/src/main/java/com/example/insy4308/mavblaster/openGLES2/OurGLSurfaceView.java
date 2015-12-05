@@ -6,8 +6,7 @@ import android.util.AttributeSet;
 
 public class OurGLSurfaceView extends GLSurfaceView{
 
-    private QuizRenderer quizRenderer;
-    private SkyboxRenderer skyboxRenderer;
+    private Renderer renderer;
     private float density;
 
     public OurGLSurfaceView(Context context){
@@ -18,18 +17,10 @@ public class OurGLSurfaceView extends GLSurfaceView{
         super(context, attributes);
     }
 
-    public void setParticles(boolean start) {
-        skyboxRenderer.setStatus(start);
+    public void setRenderer(Renderer renderer, float density){
+        this.renderer = renderer;
+        this.density = density;
+        super.setRenderer(renderer);
     }
 
-    public void setRenderer(QuizRenderer renderer, float density){
-        quizRenderer = renderer;
-        this.density = density;
-        super.setRenderer(renderer);
-    }
-    public void setRenderer(SkyboxRenderer renderer, float density){
-        skyboxRenderer = renderer;
-        this.density = density;
-        super.setRenderer(renderer);
-    }
 }

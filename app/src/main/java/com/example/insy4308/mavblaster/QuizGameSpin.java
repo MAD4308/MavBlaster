@@ -32,7 +32,8 @@ public class QuizGameSpin extends Activity {
     private Departments departments;
     private static final int REQUEST_CODE = 1;
     private int score = 0;
-    private int tries = 10;
+    private int tries = 3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +73,7 @@ public class QuizGameSpin extends Activity {
         });
 
         scoreTextView = (TextView)findViewById(R.id.score);
-        scoreTextView.setText("Score: " + String.valueOf(score));
+        scoreTextView.setText("Score: " + score);
 
         triesTextView = (TextView)findViewById(R.id.tries);
         triesTextView.setText("Questions remaining: " + tries);
@@ -112,7 +113,7 @@ public class QuizGameSpin extends Activity {
 
                 int result = data.getIntExtra("score",0);
                 score += result;
-                scoreTextView.setText("Score: " + String.valueOf(score));
+                scoreTextView.setText("Score: " + score);
 
                 Log.i("Score= ", String.valueOf(score));
                 if(tries == 0){

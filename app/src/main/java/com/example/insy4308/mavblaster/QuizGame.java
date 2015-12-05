@@ -23,6 +23,7 @@ import com.example.insy4308.mavblaster.mavUtilities.Categories;
 import com.example.insy4308.mavblaster.mavUtilities.Departments;
 import com.example.insy4308.mavblaster.openGLES2.OurGLSurfaceView;
 import com.example.insy4308.mavblaster.openGLES2.SkyboxRenderer;
+import com.facebook.appevents.AppEventsLogger;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -74,7 +75,7 @@ public class QuizGame extends Activity {
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-        renderer = new SkyboxRenderer(this,0);
+        renderer = new SkyboxRenderer(this,1);
         glSurfaceView.setRenderer(renderer, displayMetrics.density);
 
         final Departments departments = detachDeptFrom(getIntent());
@@ -150,25 +151,25 @@ public class QuizGame extends Activity {
             case R.id.A:
                 if (answer.equals(buttonA.getText())) {
                     IsAnswerCorrect = true;
-                    glSurfaceView.setParticles(true);
+                    renderer.setStatus(true);
                 }
                 break;
             case R.id.B:
                 if (answer.equals(buttonB.getText())) {
                     IsAnswerCorrect = true;
-                    glSurfaceView.setParticles(true);
+                    renderer.setStatus(true);
                 }
                 break;
             case R.id.C:
                 if (answer.equals(buttonC.getText())) {
                     IsAnswerCorrect = true;
-                    glSurfaceView.setParticles(true);
+                    renderer.setStatus(true);
                 }
                 break;
             case R.id.D:
                 if (answer.equals(buttonD.getText())) {
                     IsAnswerCorrect = true;
-                    glSurfaceView.setParticles(true);
+                    renderer.setStatus(true);
                 }
                 break;
         }
@@ -349,5 +350,18 @@ public class QuizGame extends Activity {
                 }, 3000);
             }
         }.start();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        glSurfaceView.onPause();
+        AppEventsLogger.deactivateApp(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        glSurfaceView.onResume();
+        AppEventsLogger.activateApp(this);
     }
 }
