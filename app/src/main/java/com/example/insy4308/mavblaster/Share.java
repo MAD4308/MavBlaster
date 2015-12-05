@@ -17,8 +17,6 @@ import com.facebook.share.widget.ShareDialog;
 
 import static com.example.insy4308.mavblaster.mavUtilities.Constants.FB_IMAGE_URL;
 import static com.example.insy4308.mavblaster.mavUtilities.Departments.detachDeptFrom;
-import com.example.insy4308.mavblaster.mavUtilities.Departments;
-import static com.example.insy4308.mavblaster.mavUtilities.Departments.*;
 
 // Class to show share layout view to provide options to share
 public class Share extends Activity {

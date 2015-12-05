@@ -4,13 +4,10 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 
-
 public class OurGLSurfaceView extends GLSurfaceView{
 
     private Renderer renderer;
     private float density;
-    float previousX;
-    float previousY;
 
     public OurGLSurfaceView(Context context){
         super(context);
@@ -20,9 +17,10 @@ public class OurGLSurfaceView extends GLSurfaceView{
         super(context, attributes);
     }
 
-    public void setRenderer(Renderer sRenderer, float sDensity){
-        renderer = sRenderer;
-        density = sDensity;
-        super.setRenderer(sRenderer);
+    public void setRenderer(Renderer renderer, float density){
+        this.renderer = renderer;
+        this.density = density;
+        super.setRenderer(renderer);
     }
+
 }

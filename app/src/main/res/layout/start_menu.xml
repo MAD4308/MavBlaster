@@ -22,16 +22,15 @@
             android:layout_height="250dp"
             android:id="@+id/startLogo"
             android:src="@drawable/mavs"
-            android:layout_above="@+id/start"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="74dp" />
+            android:layout_marginTop="100dp" />
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:id="@+id/mav_blaster_logo"
             android:src="@drawable/mavblaster1"
-            android:layout_above="@+id/start"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="34dp" />

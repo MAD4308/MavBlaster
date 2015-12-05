@@ -6,34 +6,57 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.insy4308.mavblaster.mavUtilities.BackgroundSoundService;
 import com.example.insy4308.mavblaster.openGLES2.OurGLSurfaceView;
-import com.example.insy4308.mavblaster.openGLES2.StartRenderer;
+import com.example.insy4308.mavblaster.openGLES2.SkyboxRenderer;
 import com.facebook.appevents.AppEventsLogger;
+
+import static com.example.insy4308.mavblaster.mavUtilities.Constants.*;
 
 public class StartMenu extends Activity {
     private OurGLSurfaceView glSurfaceView;
-    private StartRenderer renderer;
-    Intent departmentSelection = null;
+    private SkyboxRenderer renderer;
+    private Intent departmentSelection = null;
     private Boolean mIsBound = false;
     private BackgroundSoundService bss;
+    private Handler handler;
+    private Animation zoomOut;
+    private Animation zoomIn;
+    private ImageView startLogo;
+    private Button start;
+    private ImageView mavLogo;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.start_menu);
 
+            zoomIn = AnimationUtils.loadAnimation(this,R.anim.zoom_in);
+            zoomOut = AnimationUtils.loadAnimation(this, R.anim.zoom_out);
+
+            handler = new Handler();
+
             doBindService();
-            Intent music = new Intent(this,BackgroundSoundService.class);
+            final Intent music = new Intent(this,BackgroundSoundService.class);
             startService(music);
 
-            Button start = (Button) findViewById(R.id.start);
+            start = (Button) findViewById(R.id.start);
+
+            startLogo = (ImageView) findViewById(R.id.startLogo);
+            mavLogo = (ImageView) findViewById(R.id.mav_blaster_logo);
+            mavLogo.setAnimation(zoomIn);
+            startLogo.setAnimation(zoomIn);
+
             glSurfaceView = (OurGLSurfaceView) findViewById (R.id.start_surface_view);
 
             glSurfaceView.setEGLContextClientVersion(2);
@@ -41,14 +64,27 @@ public class StartMenu extends Activity {
             final DisplayMetrics displayMetrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-            renderer = new StartRenderer(this);
+            renderer = new SkyboxRenderer(this, PARTICLES_0);
             glSurfaceView.setRenderer(renderer, displayMetrics.density);
+
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    renderer.setStatus(true);
+                }
+            },100);
 
             start.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     departmentSelection = new Intent(StartMenu.this, DepartmentSelection.class);
-                    startActivity(departmentSelection);
+                    mavLogo.setAnimation(zoomOut);
+                    startLogo.setAnimation(zoomOut);
+                    start.setVisibility(v.GONE);
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            startActivity(departmentSelection);
+                        }
+                    }, 3000);
                 }
             });
         }
@@ -59,6 +95,7 @@ public class StartMenu extends Activity {
             intent.addCategory(Intent.CATEGORY_HOME);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+            renderer.setStatus(false);
             return true;
         }
 
@@ -93,6 +130,7 @@ public class StartMenu extends Activity {
         super.onPause();
         glSurfaceView.onPause();
         AppEventsLogger.deactivateApp(this);
+        renderer.setStatus(false);
     }
 
     @Override
@@ -100,6 +138,9 @@ public class StartMenu extends Activity {
         super.onResume();
         glSurfaceView.onResume();
         AppEventsLogger.activateApp(this);
+        startLogo.setAnimation(zoomIn);
+        start.setVisibility(View.VISIBLE);
+        renderer.setStatus(true);
     }
 
     @Override
@@ -107,13 +148,13 @@ public class StartMenu extends Activity {
         super.onStop();
     }
 
-    @Override
+    /*@Override
     protected void onDestroy() {
         super.onDestroy();
         doUnBindService();
         // bss.stopMusic();
         bss.onDestroy();
-    }
+    }*/
 }
 
 

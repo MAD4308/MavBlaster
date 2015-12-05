@@ -3,11 +3,14 @@ package com.example.insy4308.mavblaster;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import static com.example.insy4308.mavblaster.mavUtilities.Constants.*;
 
 import com.example.insy4308.mavblaster.mavUtilities.Departments;
 import com.example.insy4308.mavblaster.openGLES2.OurGLSurfaceView;
@@ -21,6 +24,8 @@ import static com.example.insy4308.mavblaster.mavUtilities.Departments.*;
 public class FinalScore extends Activity {
     private OurGLSurfaceView glSurfaceView;
     private SkyboxRenderer renderer;
+
+    private Handler handler;
 
     Button replayButton;
     Button orangeShareButton;
@@ -43,13 +48,15 @@ public class FinalScore extends Activity {
         Bundle score = getIntent().getExtras();
         int highScore = score.getInt("score", 0);
 
+        handler = new Handler();
+
         // GL surface setting
         glSurfaceView = (OurGLSurfaceView) findViewById (R.id.final_surface_view);
         glSurfaceView.setEGLContextClientVersion(2);
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-        renderer = new SkyboxRenderer(this);
+        renderer = new SkyboxRenderer(this, PARTICLES_2);
         glSurfaceView.setRenderer(renderer, displayMetrics.density);
         TextView scoreDisplay = (TextView) findViewById(R.id.score);
         scoreDisplay.setText(String.valueOf(highScore));
@@ -80,6 +87,11 @@ public class FinalScore extends Activity {
                 startActivity(share);
             }
         });
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                renderer.setStatus(true);
+            }
+        }, 100);
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

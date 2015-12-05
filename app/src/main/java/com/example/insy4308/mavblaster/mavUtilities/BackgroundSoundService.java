@@ -32,7 +32,7 @@ public class BackgroundSoundService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        player = MediaPlayer.create(this, R.raw.game_music);
+        player = MediaPlayer.create(this, R.raw.song);
         player.setLooping(true);
         player.setVolume(50, 50);
     }
