@@ -110,70 +110,125 @@ public class SkyboxRenderer implements Renderer {
         globalStartTime = System.nanoTime();
         switch (type) {
             case 0:
-
-                vectors.add(new Vector(0f, 1.0f, 0f));
-                vectors.add(new Vector(0f, 1.0f, 0f));
-                vectors.add(new Vector(0f, 1.0f, 0f));
-
-                points.add(new Point(0f, -3.0f, 0f));
-                points.add(new Point(-1f, -3.0f, 0f));
-                points.add(new Point(1f, -3.0f, 0f));
-
-
-                angleVarianceInDegrees = 20f;
-                speedVariance = 1f;
-
-                particleShooters.add(new ParticleShooter(points.get(0), vectors.get(0), orange, angleVarianceInDegrees, speedVariance));
-                particleShooters.add(new ParticleShooter(points.get(1), vectors.get(1), blue, angleVarianceInDegrees, speedVariance));
-                particleShooters.add(new ParticleShooter(points.get(2), vectors.get(2), blue, angleVarianceInDegrees, speedVariance));
-
-                particleTexture = TextureHelper.loadTexture(context, R.drawable.particle_star);
+                setParticleTypeOne();
                 break;
             case 1:
-
-                vectors.add(new Vector(0f, 2.0f, 0f));
-                vectors.add(new Vector(0.7f, 2.0f, 0f));
-                vectors.add(new Vector(-0.7f, 2.0f, 0f));
-
-                points.add(new Point(0f, -2.0f, 0f));
-                points.add(new Point(-0.7f, -2.0f, 0f));
-                points.add(new Point(0.7f, -2.0f, 0f));
-                points.add(new Point(-2.0f, -1.0f, 0f));
-                points.add(new Point(2.0f, -1.0f, 0f));
-
-                angleVarianceInDegrees = 20f;
-                speedVariance = 1f;
-
-                particleShooters.add(new ParticleShooter(points.get(0), vectors.get(0), orange, angleVarianceInDegrees, speedVariance));
-                particleShooters.add(new ParticleShooter(points.get(1), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
-                particleShooters.add(new ParticleShooter(points.get(2), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
-                particleShooters.add(new ParticleShooter(points.get(3), vectors.get(1), yellow, angleVarianceInDegrees, speedVariance));
-                particleShooters.add(new ParticleShooter(points.get(4), vectors.get(2), yellow, angleVarianceInDegrees, speedVariance));
-                particleTexture = TextureHelper.loadTexture(context, R.drawable.arched_star2);
+                setParticleTypeTwo();
                 break;
-
             case 2:
-
-                vectors.add(new Vector(0f, 2.0f, 0f));
-                vectors.add(new Vector(0.7f, 2.0f, 0f));
-                vectors.add(new Vector(-0.7f, 2.0f, 0f));
-
-                points.add(new Point(0f, -2.0f, 0f));
-                points.add(new Point(-0.7f, -2.0f, 0f));
-                points.add(new Point(0.7f, -2.0f, 0f));
-                points.add(new Point(-2.0f, -1.0f, 0f));
-                points.add(new Point(2.0f, -1.0f, 0f));
-
-                angleVarianceInDegrees = 20f;
-                speedVariance = 1f;
-
-                particleShooters.add(new ParticleShooter(points.get(0), vectors.get(0), orange, angleVarianceInDegrees, speedVariance));
-                particleShooters.add(new ParticleShooter(points.get(1), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
-                particleShooters.add(new ParticleShooter(points.get(2), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
-                particleShooters.add(new ParticleShooter(points.get(3), vectors.get(1), yellow, angleVarianceInDegrees, speedVariance));
-                particleShooters.add(new ParticleShooter(points.get(4), vectors.get(2), yellow, angleVarianceInDegrees, speedVariance));
-                particleTexture = TextureHelper.loadTexture(context, R.drawable.dust);
+                setParticleTypeThree();
+                break;
+            case 3:
+                setParticleTypeFour();
+                break;
+            case 4:
+                setParticleTypeFive();
                 break;
         }
+    }
+    public void setParticleTypeOne(){
+        vectors.add(new Vector(0f, 1.0f, 0f));
+
+        points.add(new Point(0f, -3.0f, 0f));
+        points.add(new Point(-1f, -3.0f, 0f));
+        points.add(new Point(1f, -3.0f, 0f));
+
+
+        angleVarianceInDegrees = 20f;
+        speedVariance = 1f;
+
+        particleShooters.add(new ParticleShooter(points.get(0), vectors.get(0), orange, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(1), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(2), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
+
+        particleTexture = TextureHelper.loadTexture(context, R.drawable.particle_star);
+    }
+    public void setParticleTypeTwo(){
+        vectors.add(new Vector(0f, 2.0f, 0f));
+        vectors.add(new Vector(0.7f, 2.0f, 0f));
+        vectors.add(new Vector(-0.7f, 2.0f, 0f));
+
+        points.add(new Point(0f, -2.0f, 0f));
+        points.add(new Point(-0.7f, -2.0f, 0f));
+        points.add(new Point(0.7f, -2.0f, 0f));
+        points.add(new Point(-2.0f, -1.0f, 0f));
+        points.add(new Point(2.0f, -1.0f, 0f));
+
+        angleVarianceInDegrees = 20f;
+        speedVariance = 1f;
+
+        particleShooters.add(new ParticleShooter(points.get(0), vectors.get(0), orange, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(1), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(2), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(3), vectors.get(1), yellow, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(4), vectors.get(2), yellow, angleVarianceInDegrees, speedVariance));
+        particleTexture = TextureHelper.loadTexture(context, R.drawable.arched_star2);
+    }
+    public void setParticleTypeThree(){
+        vectors.add(new Vector(0f, 2.0f, 0f));
+        vectors.add(new Vector(0.7f, 2.0f, 0f));
+        vectors.add(new Vector(-0.7f, 2.0f, 0f));
+
+        points.add(new Point(0f, -2.0f, 0f));
+        points.add(new Point(-0.7f, -2.0f, 0f));
+        points.add(new Point(0.7f, -2.0f, 0f));
+        points.add(new Point(-2.0f, -1.0f, 0f));
+        points.add(new Point(2.0f, -1.0f, 0f));
+
+        angleVarianceInDegrees = 20f;
+        speedVariance = 1f;
+
+        particleShooters.add(new ParticleShooter(points.get(0), vectors.get(0), orange, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(1), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(2), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(3), vectors.get(1), yellow, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(4), vectors.get(2), yellow, angleVarianceInDegrees, speedVariance));
+        particleTexture = TextureHelper.loadTexture(context, R.drawable.dust);
+    }
+    public void setParticleTypeFour(){
+        vectors.add(new Vector(0f, 0.9f, 0f));
+        vectors.add(new Vector(0.05f, 0.2f, 0f));
+        vectors.add(new Vector(-0.05f, 0.2f, 0f));
+
+        points.add(new Point(0f, -3.0f, 0f));
+        points.add(new Point(-1f, -3.0f, 0f));
+        points.add(new Point(1f, -3.0f, 0f));
+        points.add(new Point(-0.5f, -3.0f, 0f));
+        points.add(new Point(0.5f, -3.0f, 0f));
+        points.add(new Point(-1.5f, 4.0f, 0f));
+        points.add(new Point(1.5f, 4.0f, 0f));
+
+        angleVarianceInDegrees = 20f;
+        speedVariance = 0.5f;
+
+        particleShooters.add(new ParticleShooter(points.get(0), vectors.get(0), orange, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(1), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(2), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(3), vectors.get(0), yellow, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(4), vectors.get(0), yellow, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(5), vectors.get(1), blue, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(6), vectors.get(2), blue, angleVarianceInDegrees, speedVariance));
+
+        particleTexture = TextureHelper.loadTexture(context, R.drawable.arched_star2);
+    }
+    public void setParticleTypeFive(){
+        vectors.add(new Vector(0f, 0.1f, 0f));
+
+        points.add(new Point(0f, 4f, 0f));
+        points.add(new Point(-1f, 4f, 0f));
+        points.add(new Point(1f, 4f, 0f));
+        points.add(new Point(-0.5f, 4f, 0f));
+        points.add(new Point(0.5f, 4f, 0f));
+
+        angleVarianceInDegrees = 50f;
+        speedVariance = 1f;
+
+        particleShooters.add(new ParticleShooter(points.get(0), vectors.get(0), orange, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(1), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(2), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(3), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
+        particleShooters.add(new ParticleShooter(points.get(4), vectors.get(0), blue, angleVarianceInDegrees, speedVariance));
+
+        particleTexture = TextureHelper.loadTexture(context, R.drawable.particle_star);
     }
 }

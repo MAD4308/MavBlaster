@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+    <com.example.insy4308.mavblaster.openGLES2.OurGLSurfaceView
+        android:id="@+id/top_surface_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context="com.example.insy4308.mavblaster.FinalScore"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/topScores"
+            android:id="@+id/titleID"
+            android:textSize="15sp"
+            android:textColor="@color/utaSecondaryLightestTan"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/highScores"
+            android:id="@+id/highScoresId"
+            android:textSize="20sp"
+            android:textColor="@color/utaSecondaryLightestTan"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="44dp"
+            android:layout_below="@+id/titleID" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/actualScoreForRound"
+            android:id="@+id/actualScoreForRoundID"
+            android:textSize="15sp"
+            android:textColor="@color/utaSecondaryLightestTan"
+            android:layout_below="@+id/titleID"
+            android:layout_centerHorizontal="true" />
+
+
+    </RelativeLayout>
+</FrameLayout>

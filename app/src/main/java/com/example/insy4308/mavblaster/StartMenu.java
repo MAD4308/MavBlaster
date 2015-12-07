@@ -64,7 +64,7 @@ public class StartMenu extends Activity {
             final DisplayMetrics displayMetrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-            renderer = new SkyboxRenderer(this, PARTICLES_0);
+            renderer = new SkyboxRenderer(this, PARTICLES_4);
             glSurfaceView.setRenderer(renderer, displayMetrics.density);
 
             handler.postDelayed(new Runnable() {

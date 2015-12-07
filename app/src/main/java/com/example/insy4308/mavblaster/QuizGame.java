@@ -75,7 +75,7 @@ public class QuizGame extends Activity {
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-        renderer = new SkyboxRenderer(this,1);
+        renderer = new SkyboxRenderer(this,PARTICLES_1);
         glSurfaceView.setRenderer(renderer, displayMetrics.density);
 
         final Departments departments = detachDeptFrom(getIntent());
