@@ -32,7 +32,7 @@ public class QuizGameSpin extends Activity {
     private Departments departments;
     private static final int REQUEST_CODE = 1;
     private int score = 0;
-    private int tries = 3;
+    private int tries = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

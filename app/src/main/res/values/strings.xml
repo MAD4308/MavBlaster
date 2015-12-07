@@ -3,4 +3,8 @@
     <string name="start">Start</string>
     <string name="uta_banner">UNIVERSITY OF TEXAS AT ARLINGTON</string>
     <string name="facebook_app_id">506043582895237</string>
+    <string name="topScores">YOUR SCORE</string>
+    <string name="rankScoreName">RNK SCORE NAME</string>
+    <string name="highScores">Sample High Scores</string>
+    <string name="actualScoreForRound">Sample Score 1500</string>
 </resources>
