@@ -42,41 +42,41 @@
             android:textColor="@color/utaOrange"
             android:text="1000"
             android:id="@+id/score"
-            android:layout_below="@+id/finalScoreId"
-            android:layout_alignRight="@+id/finalScoreId"
-            android:layout_alignEnd="@+id/finalScoreId"
-            android:layout_marginRight="28dp"
-            android:layout_marginEnd="28dp" />
+            android:layout_above="@+id/replayId"
+            android:layout_alignLeft="@+id/finalScoreId"
+            android:layout_alignStart="@+id/finalScoreId"
+            android:layout_marginLeft="56dp"
+            android:layout_marginStart="56dp" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="170dp"
-            android:layout_height="50dp"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
             android:id="@+id/replayId"
             android:background="@drawable/replay_button_image"
-            android:layout_below="@+id/score"
-            android:layout_alignRight="@+id/score"
-            android:layout_alignEnd="@+id/score" />
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/score"
+            android:layout_alignStart="@+id/score" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="170dp"
-            android:layout_height="50dp"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
             android:id="@+id/shareId"
             android:background="@drawable/share_button_image"
             android:layout_below="@+id/replayId"
-            android:layout_alignRight="@+id/score"
-            android:layout_alignEnd="@+id/score" />
+            android:layout_alignLeft="@+id/replayId"
+            android:layout_alignStart="@+id/replayId" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="170dp"
-            android:layout_height="50dp"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
             android:id="@+id/topScoresId"
             android:background="@drawable/top_scores_button_image"
             android:layout_below="@+id/shareId"
-            android:layout_alignRight="@+id/score"
-            android:layout_alignEnd="@+id/score" />
+            android:layout_alignLeft="@+id/shareId"
+            android:layout_alignStart="@+id/shareId" />
 
         <ImageView
             android:layout_width="250dp"

@@ -85,7 +85,7 @@
 
     <Button
         android:layout_width="300dp"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:textSize="15sp"
         android:onClick="continueGame"
         android:id="@+id/returnId"

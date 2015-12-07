@@ -37,8 +37,8 @@
         </activity>
         <activity android:name=".Share">
         </activity>
-        <!--<activity android:name=".TopScores">
-        </activity> -->
+        <activity android:name=".TopScores">
+        </activity>
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
