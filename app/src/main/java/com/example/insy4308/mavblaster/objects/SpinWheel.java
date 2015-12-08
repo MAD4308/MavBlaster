@@ -57,7 +57,8 @@ public class SpinWheel {
         float topRightY = data[5] * modelView[1] +
                 data[6] * modelView[5];
 
-        double distance = Math.sqrt(Math.pow((topRightX - bottomLeftX), 2) + Math.pow((topRightY - bottomLeftY), 2));
+        double distance = Math.sqrt(Math.pow((topRightX - bottomLeftX), 2) +
+                Math.pow((topRightY - bottomLeftY), 2));
         double degree = 0;
         double first = 0;
         double second = 0;
@@ -70,14 +71,12 @@ public class SpinWheel {
                 first = topRightY;
                 second = bottomLeftY;
 
-                //Log.d("CHECK!!!!!!!!", "45 + " + Math.toDegrees(Math.acos((first - second) / (distance))));
                 degree = 45 + Math.toDegrees(Math.acos((first - second) / (distance)));
             }
             else { //2nd
                 first = topRightX;
                 second = bottomLeftX;
 
-                //Log.d("CHECK!!!!!!!!", "135 + " + Math.toDegrees(Math.acos((first - second) / (distance))));
                 degree = 135 + Math.toDegrees(Math.acos((first - second) / (distance)));
             }
         } else { //3rd or 4th
@@ -85,7 +84,6 @@ public class SpinWheel {
                 first = bottomLeftX;
                 second = topRightX;
 
-                //Log.d("CHECK!!!!!!!!", "-45 + " + Math.toDegrees(Math.acos((first - second)/ (distance))));
                 degree = -45 + Math.toDegrees(Math.acos((first - second)/ (distance)));
                 if(degree < 0)
                     degree = 360 + degree;
@@ -94,7 +92,6 @@ public class SpinWheel {
                 first = bottomLeftY;
                 second = topRightY;
 
-                //Log.d("CHECK!!!!!!!!", "225 + " + Math.toDegrees(Math.acos((first - second)/ (distance))));
                 degree = 225 + Math.toDegrees(Math.acos((first - second) / (distance)));
             }
         }
@@ -173,7 +170,8 @@ public class SpinWheel {
         Matrix.translateM(modelView, 0, centerX, centerY, 0.0f);
         Matrix.rotateM(modelView, 0, rotation, 0.0f, 0.0f, 1.0f);
         Matrix.scaleM(modelView, 0, width, height, 1.0f);
-        GLES20.glUniformMatrix4fv(GLES20.glGetUniformLocation(mProgram, "modelView"), 1, false, modelView, 0);
+        GLES20.glUniformMatrix4fv(GLES20.glGetUniformLocation(mProgram, "modelView"), 1,
+                false, modelView, 0);
 
         //GLES20.glUniform1i(textureHandler, 0);
 
@@ -198,10 +196,14 @@ public class SpinWheel {
         bo.inScaled = false;
         Bitmap tex = BitmapFactory.decodeResource(context.getResources(), resource, bo);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture[0]);
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST);
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_NEAREST);
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER,
+                GLES20.GL_NEAREST);
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER,
+                GLES20.GL_NEAREST);
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,
+                GLES20.GL_CLAMP_TO_EDGE);
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,
+                GLES20.GL_CLAMP_TO_EDGE);
 
         GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, tex, 0);
         tex.recycle();
