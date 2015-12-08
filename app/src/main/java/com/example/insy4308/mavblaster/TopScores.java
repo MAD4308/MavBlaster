@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -26,8 +27,11 @@ public class TopScores extends Activity {
     private Intent startMenu = null;
     private Handler handler;
 
+    Typeface spaceFont;
+
     TextView displayHighScores;
     TextView actualScoreForRound;
+    TextView title;
     String [] highScores = new String[10];
     String stringOfHighScores = "";
 
@@ -40,7 +44,8 @@ public class TopScores extends Activity {
         setContentView(R.layout.top_scores);
         callbackManager = CallbackManager.Factory.create();
         handler = new Handler();
-        final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        final ActivityManager activityManager = (ActivityManager) getSystemService(
+                Context.ACTIVITY_SERVICE);
         onTrimMemory(TRIM_MEMORY_COMPLETE);
 
         Bundle score = getIntent().getExtras();
@@ -65,6 +70,13 @@ public class TopScores extends Activity {
         }, 1000);
         actualScoreForRound = (TextView) findViewById(R.id.actualScoreForRoundID);
         displayHighScores = (TextView) findViewById(R.id.highScoresId);
+        title = (TextView) findViewById(R.id.titleID);
+
+
+        spaceFont = Typeface.createFromAsset(getAssets(), "fonts/dangerflightlaser.ttf");
+        actualScoreForRound.setTypeface(spaceFont);
+        displayHighScores.setTypeface(spaceFont);
+        title.setTypeface(spaceFont);
 
         actualScoreForRound.setText(String.valueOf(highScore));
         displayHighScores.setText(rankedScores);

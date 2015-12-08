@@ -37,5 +37,4 @@ public enum Departments {
     public String getDepartmentUrl(int i) {
         return SET_URLS[departmentCode-1][i - 1];
     }
-
 }

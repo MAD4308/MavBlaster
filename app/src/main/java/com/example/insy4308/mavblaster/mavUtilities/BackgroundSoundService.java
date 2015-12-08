@@ -22,13 +22,9 @@ public class BackgroundSoundService extends Service {
             return BackgroundSoundService.this;
         }
     }
-
-
     public IBinder onBind(Intent arg0) {
         return mBinder;
     }
-
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -36,10 +32,6 @@ public class BackgroundSoundService extends Service {
         player.setLooping(true);
         player.setVolume(50, 50);
     }
-
-
-
-
     public int onStartCommand(Intent intent, int flags, int startId) {
         player.start();
         return START_STICKY;
@@ -51,7 +43,6 @@ public class BackgroundSoundService extends Service {
             length = player.getCurrentPosition();
         }
     }
-
     public void resumeMusic(){
         if(player.isPlaying()==false){
             player.seekTo(length);
@@ -60,15 +51,12 @@ public class BackgroundSoundService extends Service {
 
         }
     }
-
     public void stopMusic(){
         player.stop();
         player.release();
         player = null;
 
     }
-
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -82,16 +70,10 @@ public class BackgroundSoundService extends Service {
             }
         }
     }
-
-
     public void onLowMemory() {
         super.onLowMemory();
     }
-
-
-
     public IBinder onUnBind(Intent arg0){
         return null;
     }
 }
-

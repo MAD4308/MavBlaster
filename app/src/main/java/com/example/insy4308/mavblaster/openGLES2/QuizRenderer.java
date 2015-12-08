@@ -1,12 +1,15 @@
 package com.example.insy4308.mavblaster.openGLES2;
 
 import android.content.Context;
+import android.graphics.PixelFormat;
 import android.opengl.GLES20;
-import static android.opengl.GLES20.*;
+import android.opengl.GLSurfaceView;
 import android.opengl.GLSurfaceView.Renderer;
 import android.util.Log;
 
 import com.example.insy4308.mavblaster.R;
+import com.example.insy4308.mavblaster.mavUtilities.TextureHelper;
+import com.example.insy4308.mavblaster.objects.Skybox;
 import com.example.insy4308.mavblaster.objects.SpinWheel;
 
 import java.util.Random;
@@ -27,6 +30,8 @@ public class QuizRenderer implements Renderer {
     int category = 0;
     int degreesSpun = 0;
 
+
+
     public QuizRenderer(Context c) { context = c; }
 
     public boolean getSpinning() { return spinning; }
@@ -37,12 +42,11 @@ public class QuizRenderer implements Renderer {
     public void onSurfaceCreated(GL10 gl, EGLConfig config)
     {
         //Log.d("QuizRenderer: ", "in onSurfaceCreated");
-        GLES20.glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
-        GLES20.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
         r = new Random();
 
-        sprite = new SpinWheel(context, R.drawable.pentagon_wheel2);
+        sprite = new SpinWheel(context, R.drawable.galaxytest2);
     }
 
     @Override
@@ -77,6 +81,8 @@ public class QuizRenderer implements Renderer {
     {
         //Log.d("in onDrawFrame", "in onDrawFrame");
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
+
+
 
         setAnimation();
 

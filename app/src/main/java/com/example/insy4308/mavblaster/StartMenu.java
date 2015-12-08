@@ -28,8 +28,6 @@ public class StartMenu extends Activity {
     private OurGLSurfaceView glSurfaceView;
     private SkyboxRenderer renderer;
     private Intent departmentSelection = null;
-    private Boolean mIsBound = false;
-    private BackgroundSoundService bss;
     private Handler handler;
     private Animation zoomOut;
     private Animation zoomIn;
@@ -48,7 +46,6 @@ public class StartMenu extends Activity {
 
         handler = new Handler();
 
-        doBindService();
         final Intent music = new Intent(this,BackgroundSoundService.class);
         startService(music);
 
@@ -106,30 +103,6 @@ public class StartMenu extends Activity {
 
         return super.onKeyDown(keyCode, event);
     }
-    private ServiceConnection Scon = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-
-            bss = ((BackgroundSoundService.ServiceBinder) service).getService();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            bss = null;
-
-        }
-    };
-    void doBindService(){
-        bindService(new Intent(this, BackgroundSoundService.class), Scon, Context.BIND_AUTO_CREATE);
-        mIsBound = true;
-    }
-
-    void doUnBindService(){
-        if(mIsBound==true){
-            unbindService(Scon);
-            mIsBound = false;
-        }
-    }
     @Override
     protected void onPause() {
         super.onPause();
@@ -156,8 +129,8 @@ public class StartMenu extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        doUnBindService();
-        // bss.stopMusic();
-        bss.onDestroy();
+
+        Intent music = new Intent(this,BackgroundSoundService.class);
+        stopService(music);
     }
 }

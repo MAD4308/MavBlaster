@@ -2,12 +2,15 @@ package com.example.insy4308.mavblaster;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.insy4308.mavblaster.mavUtilities.Categories;
@@ -25,6 +28,8 @@ public class QuizGameSpin extends Activity {
     Button spinButton;
     TextView scoreTextView;
     TextView triesTextView;
+    ImageView backgroundOver;
+    Typeface spaceFont;
 
     private Intent quizGame = null;
     private Intent finalScore = null;
@@ -39,7 +44,6 @@ public class QuizGameSpin extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz_game_spin);
         departments= detachDeptFrom(getIntent());
-        onTrimMemory(TRIM_MEMORY_BACKGROUND);
 
         //setup glsurfaceview
         glView = (OurGLSurfaceView)findViewById(R.id.view);
@@ -60,6 +64,8 @@ public class QuizGameSpin extends Activity {
         finalScore = new Intent(QuizGameSpin.this, FinalScore.class);
 
         //setup buttons, textfields
+        backgroundOver = (ImageView)findViewById(R.id.backgroundOver);
+        backgroundOver.bringToFront();
         spinButton = (Button)findViewById(R.id.spin_button);
         spinButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,16 +78,20 @@ public class QuizGameSpin extends Activity {
                 startActivityForResult(quizGame, REQUEST_CODE);
             }
         });
+
         if(savedInstanceState !=null){
             tries = savedInstanceState.getInt("tries");
             score = savedInstanceState.getInt("score");
         }
 
+        spaceFont = Typeface.createFromAsset(getAssets(),"fonts/dangerflightlaser.ttf");
         scoreTextView = (TextView)findViewById(R.id.score);
         scoreTextView.setText("Score: " + score);
+        scoreTextView.setTypeface(spaceFont);
 
         triesTextView = (TextView)findViewById(R.id.tries);
         triesTextView.setText("Questions remaining: " + tries);
+        triesTextView.setTypeface(spaceFont);
 
         quizGame = new Intent(QuizGameSpin.this, QuizGame.class);
         finalScore = new Intent(QuizGameSpin.this, FinalScore.class);
@@ -96,6 +106,14 @@ public class QuizGameSpin extends Activity {
 
         return super.onKeyDown(keyCode, event);
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("tries", tries);
+        outState.putInt("score", score);
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -128,15 +146,5 @@ public class QuizGameSpin extends Activity {
                 }
             }
         }
-    }
-    @Override
-    public void onTrimMemory(int level) {
-        super.onTrimMemory(level);
-    }
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("tries", tries);
-        outState.putInt("score", score);
     }
 }

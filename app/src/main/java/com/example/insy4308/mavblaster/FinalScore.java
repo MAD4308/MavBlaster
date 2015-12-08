@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ConfigurationInfo;
 import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.Handler;
@@ -61,6 +62,7 @@ public class FinalScore extends Activity {
     String rankedScores = "";
     private static final String PREFS_NAME = "MyPrefsFile";
     private static final int TEXT_ID = 0;
+    Typeface spaceFont;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,7 @@ public class FinalScore extends Activity {
         glSurfaceView.setEGLContextClientVersion(2);
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        spaceFont = Typeface.createFromAsset(getAssets(), "fonts/dangerflightlaser.ttf");
         if(activityManager.getMemoryClass()>128)
             renderer = new SkyboxRenderer(this, PARTICLES_2, HIGH_RES);
         else
@@ -90,6 +93,7 @@ public class FinalScore extends Activity {
         glSurfaceView.setRenderer(renderer, displayMetrics.density);
 
         TextView scoreDisplay = (TextView) findViewById(R.id.score);
+        scoreDisplay.setTypeface(spaceFont);
         scoreDisplay.setText(String.valueOf(highScore));
 
         callbackManager = CallbackManager.Factory.create();
@@ -187,9 +191,9 @@ public class FinalScore extends Activity {
                 String [] info = highScores[i].split(";");
 
                 if(rankCount==10)
-                    rankedScores += String.format("%d%13s%13s\n",rankCount, info[0], info[1]);
+                    rankedScores += String.format("%d%11s%13s\n",rankCount, info[0], info[1]);
                 else
-                    rankedScores += String.format("%3d%13s%13s\n",rankCount, info[0], info[1]);
+                    rankedScores += String.format("%3d%11s%11s\n",rankCount, info[0], info[1]);
                 rankCount++;
             }
         }
@@ -213,9 +217,9 @@ public class FinalScore extends Activity {
                 String [] info = highScores[i].split(";");
 
                 if(rankCount==10)
-                    rankedScores += String.format("%d%13s%13s\n",rankCount, info[0], info[1]);
+                    rankedScores += String.format("%d%11s%11s\n",rankCount, info[0], info[1]);
                 else
-                    rankedScores += String.format("%3d%13s%13s\n",rankCount, info[0], info[1]);
+                    rankedScores += String.format("%3d%11s%11s\n",rankCount, info[0], info[1]);
                 rankCount++;
             }
         }

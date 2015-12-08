@@ -36,9 +36,9 @@
             android:layout_marginBottom="34dp" />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/start_button"
+            android:layout_width="200dp"
+            android:layout_height="75dp"
+            android:background="@drawable/button"
             android:textColor="@color/utaWhite"
             android:id="@+id/start"
             android:layout_marginBottom="47dp"
