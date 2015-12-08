@@ -69,7 +69,8 @@ public class QuizGame extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz_game);
-        final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        final ActivityManager activityManager = (ActivityManager) getSystemService(
+                Context.ACTIVITY_SERVICE);
 
         glSurfaceView = (OurGLSurfaceView) findViewById (R.id.quiz_game_surface_view);
 
@@ -120,7 +121,8 @@ public class QuizGame extends Activity {
             buttonC.setVisibility(View.GONE);
             buttonD.setVisibility(View.GONE);
             timerBar.setVisibility(View.GONE);
-            JsonObjectRequest(QUIZ_URL_START + departments.getDepartmentUrl(categories.getCategoryCode()) + QUIZ_URL_END);
+            JsonObjectRequest(QUIZ_URL_START + departments.getDepartmentUrl(categories
+                    .getCategoryCode()) + QUIZ_URL_END);
         }
         startMenu = new Intent(QuizGame.this, StartMenu.class);
 
