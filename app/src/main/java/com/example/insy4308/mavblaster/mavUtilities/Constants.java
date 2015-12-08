@@ -11,6 +11,9 @@ public final class Constants {
     public static final int VECTOR_COMPONENT_COUNT = 3;
     public static final int PARTICLE_START_TIME_COMPONENT_COUNT = 1;
 
+    public static final boolean HIGH_RES = true;
+    public static final boolean LOW_RES = false;
+
     public static final int INSY = 1;
     public static final int FINA = 2;
     public static final int MANA = 3;

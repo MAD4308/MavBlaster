@@ -1,12 +1,16 @@
 package com.example.insy4308.mavblaster;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ConfigurationInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -63,20 +67,28 @@ public class FinalScore extends Activity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.final_score);
+        final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+
         final Departments departments = detachDeptFrom(getIntent());
         Bundle score = getIntent().getExtras();
         int highScore = score.getInt("score", 0);
 
         handler = new Handler();
 
+        onTrimMemory(TRIM_MEMORY_RUNNING_LOW);
+
         // GL surface setting
-        glSurfaceView = (OurGLSurfaceView) findViewById (R.id.final_surface_view);
+
+        glSurfaceView = (OurGLSurfaceView) findViewById(R.id.final_surface_view);
         glSurfaceView.setEGLContextClientVersion(2);
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-        renderer = new SkyboxRenderer(this, PARTICLES_2);
+        if(activityManager.getMemoryClass()>128)
+            renderer = new SkyboxRenderer(this, PARTICLES_2, HIGH_RES);
+        else
+            renderer = new SkyboxRenderer(this, PARTICLES_2, LOW_RES);
         glSurfaceView.setRenderer(renderer, displayMetrics.density);
+
         TextView scoreDisplay = (TextView) findViewById(R.id.score);
         scoreDisplay.setText(String.valueOf(highScore));
 
@@ -150,13 +162,6 @@ public class FinalScore extends Activity {
                                 saveTopScore(s[0], returnScore[0], returnName[0]);
                                 return;
                             }
-                        })
-                .setNegativeButton("Exit",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                                int id) {
-                                dialog.cancel();
-                            }
                         });
         // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
@@ -198,11 +203,14 @@ public class FinalScore extends Activity {
             highScores = rankedScores.split("\\|");
 
             int rankCount = 1;
-            rankedScores = "RNK      SCORE      NAME\n";
+            rankedScores = String.format("%s%8s%8s\n","RNK","SCORE","NAME");
             for (int i = highScores.length - 1; i >= 0; i--) {
                 String [] info = highScores[i].split(";");
 
-                rankedScores += rankCount + "      " + info[0] + "      " + info[1] + "\n";
+                if(rankCount==10)
+                    rankedScores += String.format("%d%13s%13s\n",rankCount, info[0], info[1]);
+                else
+                    rankedScores += String.format("%3d%13s%13s\n",rankCount, info[0], info[1]);
                 rankCount++;
             }
         }
@@ -324,5 +332,9 @@ public class FinalScore extends Activity {
         super.onResume();
         glSurfaceView.onResume();
         AppEventsLogger.activateApp(this);
+    }
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
     }
 }

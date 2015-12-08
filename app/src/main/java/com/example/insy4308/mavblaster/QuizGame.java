@@ -1,6 +1,8 @@
 package com.example.insy4308.mavblaster;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -67,6 +69,7 @@ public class QuizGame extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz_game);
+        final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 
         glSurfaceView = (OurGLSurfaceView) findViewById (R.id.quiz_game_surface_view);
 
@@ -75,7 +78,10 @@ public class QuizGame extends Activity {
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-        renderer = new SkyboxRenderer(this,PARTICLES_1);
+        if(activityManager.getMemoryClass()>128)
+            renderer = new SkyboxRenderer(this, PARTICLES_1, HIGH_RES);
+        else
+            renderer = new SkyboxRenderer(this, PARTICLES_1, LOW_RES);
         glSurfaceView.setRenderer(renderer, displayMetrics.density);
 
         final Departments departments = detachDeptFrom(getIntent());

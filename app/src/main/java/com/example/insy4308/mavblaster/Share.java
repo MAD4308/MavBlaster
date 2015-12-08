@@ -71,5 +71,9 @@ public class Share extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+    }
 
 }
