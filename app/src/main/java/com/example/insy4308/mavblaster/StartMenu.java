@@ -1,6 +1,7 @@
 package com.example.insy4308.mavblaster;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -36,58 +37,62 @@ public class StartMenu extends Activity {
     private Button start;
     private ImageView mavLogo;
 
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.start_menu);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.start_menu);
+        final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 
-            zoomIn = AnimationUtils.loadAnimation(this,R.anim.zoom_in);
-            zoomOut = AnimationUtils.loadAnimation(this, R.anim.zoom_out);
+        zoomIn = AnimationUtils.loadAnimation(this,R.anim.zoom_in);
+        zoomOut = AnimationUtils.loadAnimation(this, R.anim.zoom_out);
 
-            handler = new Handler();
+        handler = new Handler();
 
-            doBindService();
-            final Intent music = new Intent(this,BackgroundSoundService.class);
-            startService(music);
+        doBindService();
+        final Intent music = new Intent(this,BackgroundSoundService.class);
+        startService(music);
 
-            start = (Button) findViewById(R.id.start);
+        start = (Button) findViewById(R.id.start);
 
-            startLogo = (ImageView) findViewById(R.id.startLogo);
-            mavLogo = (ImageView) findViewById(R.id.mav_blaster_logo);
-            mavLogo.setAnimation(zoomIn);
-            startLogo.setAnimation(zoomIn);
+        startLogo = (ImageView) findViewById(R.id.startLogo);
+        mavLogo = (ImageView) findViewById(R.id.mav_blaster_logo);
+        mavLogo.setAnimation(zoomIn);
+        startLogo.setAnimation(zoomIn);
 
-            glSurfaceView = (OurGLSurfaceView) findViewById (R.id.start_surface_view);
+        glSurfaceView = (OurGLSurfaceView) findViewById (R.id.start_surface_view);
 
-            glSurfaceView.setEGLContextClientVersion(2);
+        glSurfaceView.setEGLContextClientVersion(2);
 
-            final DisplayMetrics displayMetrics = new DisplayMetrics();
-            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        final DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-            renderer = new SkyboxRenderer(this, PARTICLES_4);
-            glSurfaceView.setRenderer(renderer, displayMetrics.density);
+        if(activityManager.getMemoryClass()>128)
+            renderer = new SkyboxRenderer(this, PARTICLES_4, HIGH_RES);
+        else
+            renderer = new SkyboxRenderer(this, PARTICLES_4, LOW_RES);
+        glSurfaceView.setRenderer(renderer, displayMetrics.density);
 
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    renderer.setStatus(true);
-                }
-            },100);
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                renderer.setStatus(true);
+            }
+        },100);
 
-            start.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    departmentSelection = new Intent(StartMenu.this, DepartmentSelection.class);
-                    mavLogo.setAnimation(zoomOut);
-                    startLogo.setAnimation(zoomOut);
-                    start.setVisibility(v.GONE);
-                    handler.postDelayed(new Runnable() {
-                        public void run() {
-                            startActivity(departmentSelection);
-                        }
-                    }, 3000);
-                }
-            });
-        }
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                departmentSelection = new Intent(StartMenu.this, DepartmentSelection.class);
+                mavLogo.setAnimation(zoomOut);
+                startLogo.setAnimation(zoomOut);
+                start.setVisibility(v.GONE);
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        startActivity(departmentSelection);
+                    }
+                }, 3000);
+            }
+        });
+    }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -148,13 +153,11 @@ public class StartMenu extends Activity {
         super.onStop();
     }
 
-    /*@Override
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         doUnBindService();
         // bss.stopMusic();
         bss.onDestroy();
-    }*/
+    }
 }
-
-

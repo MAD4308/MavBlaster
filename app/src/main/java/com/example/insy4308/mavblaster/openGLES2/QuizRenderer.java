@@ -2,6 +2,7 @@ package com.example.insy4308.mavblaster.openGLES2;
 
 import android.content.Context;
 import android.opengl.GLES20;
+import static android.opengl.GLES20.*;
 import android.opengl.GLSurfaceView.Renderer;
 import android.util.Log;
 
@@ -37,6 +38,7 @@ public class QuizRenderer implements Renderer {
     {
         //Log.d("QuizRenderer: ", "in onSurfaceCreated");
         GLES20.glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+        GLES20.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
         r = new Random();
 

@@ -32,13 +32,14 @@ public class QuizGameSpin extends Activity {
     private Departments departments;
     private static final int REQUEST_CODE = 1;
     private int score = 0;
-    private int tries = 1;
+    private int tries = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz_game_spin);
         departments= detachDeptFrom(getIntent());
+        onTrimMemory(TRIM_MEMORY_BACKGROUND);
 
         //setup glsurfaceview
         glView = (OurGLSurfaceView)findViewById(R.id.view);
@@ -123,5 +124,9 @@ public class QuizGameSpin extends Activity {
                 }
             }
         }
+    }
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
     }
 }

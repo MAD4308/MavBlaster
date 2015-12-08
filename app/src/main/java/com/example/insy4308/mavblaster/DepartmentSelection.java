@@ -1,6 +1,8 @@
 package com.example.insy4308.mavblaster;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,6 +39,7 @@ public class DepartmentSelection extends Activity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.department_selection);
+        final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 
         handler = new Handler();
 
@@ -46,7 +49,10 @@ public class DepartmentSelection extends Activity implements View.OnClickListene
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-        renderer = new SkyboxRenderer(this, PARTICLES_0);
+        if(activityManager.getMemoryClass()>128)
+            renderer = new SkyboxRenderer(this, PARTICLES_0, HIGH_RES);
+        else
+            renderer = new SkyboxRenderer(this, PARTICLES_0, LOW_RES);
         glSurfaceView.setRenderer(renderer, displayMetrics.density);
 
         iNSY = (Button) findViewById(R.id.insy);

@@ -27,6 +27,7 @@ public class SkyboxRenderer implements Renderer {
     private final Context context;
 
     private boolean start = false;
+    private boolean high = true;
     private int type = 0;
 
     float angleVarianceInDegrees;
@@ -54,9 +55,10 @@ public class SkyboxRenderer implements Renderer {
     private float xRotation, yRotation;
     private float animation = 0.0f;
 
-    public SkyboxRenderer(Context context, int type) {
+    public SkyboxRenderer(Context context, int type, boolean high) {
         this.context = context;
         this.type = type;
+        this.high = high;
     }
 
     public void backgroundAnimation(float deltaX, float deltaY) {
@@ -82,13 +84,23 @@ public class SkyboxRenderer implements Renderer {
         skybox = new Skybox(context);
 
         setParticleType(type);
+        setSkyboxTexture(high);
+    }
 
-        skyboxTexture = TextureHelper.loadCubeMap(context, new int[] {
-        /*negx*/R.drawable.space_right, /*posx*/R.drawable.space_left,
-        /*negy*/R.drawable.space_down, /*posy*/R.drawable.space_up,
-        /*negz*/R.drawable.space_front, /*posz*/R.drawable.space_back});
-
-
+    public void setSkyboxTexture(boolean high)
+    {
+        if(high) {
+            skyboxTexture = TextureHelper.loadCubeMap(context, new int[]{
+            /*negx*/R.drawable.space_right, /*posx*/R.drawable.space_left,
+            /*negy*/R.drawable.space_down, /*posy*/R.drawable.space_up,
+            /*negz*/R.drawable.space_front, /*posz*/R.drawable.space_back});
+        }
+        else{
+            skyboxTexture = TextureHelper.loadCubeMap(context, new int[]{
+            /*negx*/R.drawable.space_right_low, /*posx*/R.drawable.space_left_low,
+            /*negy*/R.drawable.space_down_low, /*posy*/R.drawable.space_up_low,
+            /*negz*/R.drawable.space_front_low, /*posz*/R.drawable.space_back_low});
+        }
     }
 
     @Override

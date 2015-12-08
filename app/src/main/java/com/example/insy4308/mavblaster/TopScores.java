@@ -1,6 +1,8 @@
 package com.example.insy4308.mavblaster;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,6 +40,8 @@ public class TopScores extends Activity {
         setContentView(R.layout.top_scores);
         callbackManager = CallbackManager.Factory.create();
         handler = new Handler();
+        final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        onTrimMemory(TRIM_MEMORY_COMPLETE);
 
         Bundle score = getIntent().getExtras();
         int highScore = score.getInt("score", 0);
@@ -49,7 +53,10 @@ public class TopScores extends Activity {
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-        renderer = new SkyboxRenderer(this, PARTICLES_3);
+        if(activityManager.getMemoryClass()>128)
+            renderer = new SkyboxRenderer(this, PARTICLES_3, HIGH_RES);
+        else
+            renderer = new SkyboxRenderer(this, PARTICLES_3, LOW_RES);
         glView.setRenderer(renderer, displayMetrics.density);
         handler.postDelayed(new Runnable() {
             public void run() {
@@ -79,6 +86,10 @@ public class TopScores extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
     }
 }
 
