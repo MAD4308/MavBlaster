@@ -158,6 +158,8 @@ public class FinalScore extends Activity {
                             public void onClick(DialogInterface dialog,
                                                 int id) {
                                 String retrieveName = input.getText().toString();
+                                if(input.getText().toString().isEmpty())
+                                    retrieveName = "Anon";
                                 returnName[0] = retrieveName;
                                 saveTopScore(s[0], returnScore[0], returnName[0]);
                                 return;
@@ -179,12 +181,15 @@ public class FinalScore extends Activity {
             rankedScores = prefs.getString("highScores", "not found");
             highScores = rankedScores.split("\\|");
 
-            rankedScores = "RNK      SCORE      NAME\n";
+            rankedScores = String.format("%s%8s%8s\n","RNK","SCORE","NAME");
             int rankCount = 1;
             for (int i = highScores.length - 1; i >= 0; i--) {
                 String [] info = highScores[i].split(";");
 
-                rankedScores += "\n   " + rankCount + "      " + info[0] + "      " + info[1]+ "\n";
+                if(rankCount==10)
+                    rankedScores += String.format("%d%13s%13s\n",rankCount, info[0], info[1]);
+                else
+                    rankedScores += String.format("%3d%13s%13s\n",rankCount, info[0], info[1]);
                 rankCount++;
             }
         }

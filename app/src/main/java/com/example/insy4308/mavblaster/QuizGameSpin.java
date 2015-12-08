@@ -72,6 +72,10 @@ public class QuizGameSpin extends Activity {
                 startActivityForResult(quizGame, REQUEST_CODE);
             }
         });
+        if(savedInstanceState !=null){
+            tries = savedInstanceState.getInt("tries");
+            score = savedInstanceState.getInt("score");
+        }
 
         scoreTextView = (TextView)findViewById(R.id.score);
         scoreTextView.setText("Score: " + score);
@@ -128,5 +132,11 @@ public class QuizGameSpin extends Activity {
     @Override
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("tries", tries);
+        outState.putInt("score", score);
     }
 }
