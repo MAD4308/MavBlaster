@@ -39,7 +39,8 @@ public class StartMenu extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_menu);
-        final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        final ActivityManager activityManager = (ActivityManager) getSystemService(
+                Context.ACTIVITY_SERVICE);
 
         zoomIn = AnimationUtils.loadAnimation(this,R.anim.zoom_in);
         zoomOut = AnimationUtils.loadAnimation(this, R.anim.zoom_out);

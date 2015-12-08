@@ -10,8 +10,10 @@ abstract class ShaderProgram {
 
     protected final int program;
 
-    protected ShaderProgram(Context context, int vertexShaderResourceId, int fragmentShaderResourceId) {
-        program = ShaderHelper.buildProgram(TextResourceReader.readTextFileFromResource(context, vertexShaderResourceId),
+    protected ShaderProgram(Context context, int vertexShaderResourceId,
+                            int fragmentShaderResourceId) {
+        program = ShaderHelper.buildProgram(TextResourceReader.readTextFileFromResource(context,
+                        vertexShaderResourceId),
                 TextResourceReader.readTextFileFromResource(context, fragmentShaderResourceId));
     }
 

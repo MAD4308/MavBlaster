@@ -84,7 +84,7 @@ public class SkyboxRenderer implements Renderer {
         skybox = new Skybox(context);
 
         setParticleType(type);
-        setSkyboxTexture(high);
+        setSkyboxTexture(true);
     }
 
     public void setSkyboxTexture(boolean high)

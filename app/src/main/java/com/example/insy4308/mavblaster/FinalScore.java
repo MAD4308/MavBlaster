@@ -69,7 +69,8 @@ public class FinalScore extends Activity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.final_score);
-        final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        final ActivityManager activityManager = (ActivityManager) getSystemService(
+                Context.ACTIVITY_SERVICE);
 
         final Departments departments = detachDeptFrom(getIntent());
         Bundle score = getIntent().getExtras();
@@ -299,10 +300,6 @@ public class FinalScore extends Activity {
         {
             if (Integer.parseInt(scoreStorage[i]) < highScore)
             {
-                //String name = askForNameDialog(); // needs to return a string, and only take the first 3 characters and capitalize them
-                //Log.d("alert name ",name);
-                // Alert dialog here, save string name and add it to the String.valueOf(highScore) entry
-                //  + "\t\t\t\t" + name.toUpperCase()
                 scoreStorage[scoreStorage.length-1] = String.valueOf(highScore);
             }
         }

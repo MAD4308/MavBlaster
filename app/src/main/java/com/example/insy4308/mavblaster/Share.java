@@ -42,7 +42,8 @@ public class Share extends Activity {
         content = new ShareLinkContent.Builder()
                 .setImageUrl(Uri.parse(FB_IMAGE_URL))
                 .setContentTitle("Mav Blaster")
-                .setContentDescription("Beat my high score of "+highScore+" in quiz Department: "+departments.getDepartmentName())
+                .setContentDescription("Beat my high score of "+highScore+
+                        " in quiz Department: "+departments.getDepartmentName())
                 .setContentUrl(Uri.parse("https://developers.facebook.com/android"))
                 .build();
         shareButton = (ShareButton) findViewById(R.id.fb_share_button);
